@@ -1,0 +1,21 @@
+name: Continuous Integration
+on: [pull_request]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install dependency
+        run: yarn install --frozen-lockfile
+      - name: Type check
+        run: yarn type-check
+      - name: Build Storybook
+        run: yarn build-storybook
+      - name: Build UI Components
+        run: yarn build
