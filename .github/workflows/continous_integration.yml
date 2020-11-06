@@ -2,7 +2,7 @@ name: Continuous Integration
 on: [pull_request]
 
 jobs:
-  ci:
+  basic:
     runs-on: ubuntu-latest
     steps:
       - name: Git checkout
