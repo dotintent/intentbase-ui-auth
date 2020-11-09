@@ -8,10 +8,19 @@ import { SnackbarContextProvider } from '../components/SnackbarProvider';
 
 interface IntentbaseProps {
   theme?: Partial<Theme> | ((outerTheme: Theme) => Theme);
+  region: string;
+  userPoolId: string;
+  userPoolWebClientId: string;
 }
 
-export const IntentbaseProvider: FC<IntentbaseProps> = ({ children, theme = defaultTheme }) => {
-  configureAmplify();
+export const IntentbaseProvider: FC<IntentbaseProps> = ({
+  children,
+  region = 'eu-central-1',
+  userPoolId,
+  userPoolWebClientId,
+  theme = defaultTheme,
+}) => {
+  configureAmplify(region, userPoolId, userPoolWebClientId);
   return (
     <StylesProvider injectFirst>
       <MuiThemeProvider theme={theme}>

@@ -1,11 +1,15 @@
 import Amplify from 'aws-amplify';
 
-export const configureAmplify = (): void => {
+export const configureAmplify = (
+  region: string,
+  userPoolId: string,
+  userPoolWebClientId: string,
+): void => {
   Amplify.configure({
     Auth: {
-      region: process.env.AWS_DEFAULT_REGION,
-      userPoolId: process.env.COGNITO_USER_POOL_ID,
-      userPoolWebClientId: process.env.COGNITO_USER_POOL_CLIENT_ID,
+      region,
+      userPoolId,
+      userPoolWebClientId,
     },
   });
 };
