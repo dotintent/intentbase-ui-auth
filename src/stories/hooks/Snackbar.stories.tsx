@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { Button } from '@material-ui/core';
-import { ShowSnackbarProps, useSnackbar } from '../../components/SnackbarProvider';
+import { ShowSnackbarProps } from '../../providers/SnackbarProvider';
+import { useSnackbar } from '../../hooks/useSnackbar';
 
 const SnackbarMock: FC<ShowSnackbarProps> = (props) => {
   const showSnackbar = useSnackbar();

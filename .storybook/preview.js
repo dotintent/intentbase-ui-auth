@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntentbaseProvider } from '../src';
+import { IntentbaseProvider } from '../src/providers/IntentbaseProvider';
 
 export const decorators = [
   (Story) => (

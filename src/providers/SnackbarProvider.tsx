@@ -1,4 +1,4 @@
-import React, { createContext, FC, useContext, useState } from 'react';
+import React, { createContext, FC, useState } from 'react';
 import Snackbar, { SnackbarOrigin } from '@material-ui/core/Snackbar';
 import MuiAlert, { Color } from '@material-ui/lab/Alert';
 
@@ -9,11 +9,6 @@ export interface SnackbarContextValue {
 export const SnackbarContext = createContext<SnackbarContextValue>({
   showSnackbar: () => {},
 });
-
-export const useSnackbar = (): ((props: ShowSnackbarProps) => void) => {
-  const { showSnackbar } = useContext(SnackbarContext);
-  return showSnackbar;
-};
 
 const getDisplayDuration = (message: string): number => {
   const { min, max } = Math;

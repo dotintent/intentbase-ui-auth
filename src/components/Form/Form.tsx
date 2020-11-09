@@ -24,7 +24,7 @@ import { Header } from '../Header';
 import { defaultAuthValidation, DefaultAuthValidationOptions } from '../../utils/validations';
 import { isObjectEmpty } from '../../utils/isObjectEmpty';
 import { CognitoError } from '../../common/interfaces/CognitoError';
-import { useSnackbar } from '../SnackbarProvider';
+import { useSnackbar } from '../../hooks/useSnackbar';
 import { useSafeSetState } from '../../hooks/useSafeSetState';
 
 export interface FormProps {
