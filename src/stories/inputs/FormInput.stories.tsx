@@ -28,16 +28,12 @@ const Template: Story<TemplateProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  id: 'email',
-  name: 'email',
-  label: 'Email',
+  source: 'email',
 };
 
 export const InitialValue = Template.bind({});
 InitialValue.args = {
-  id: 'email',
-  name: 'email',
-  label: 'Email',
+  source: 'email',
   form: {
     initialValues: {
       email: 'joe.doe@gmail.com',
@@ -47,10 +43,9 @@ InitialValue.args = {
 
 export const PasswordType = Template.bind({});
 PasswordType.args = {
-  id: 'password',
-  name: 'password',
-  label: 'Password',
-  type: 'password',
+  source: 'password',
+  repeat: true,
+  passwordPreview: true,
   form: {
     initialValues: {
       password: '123456m#',

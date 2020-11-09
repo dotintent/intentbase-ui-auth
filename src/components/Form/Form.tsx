@@ -28,7 +28,7 @@ import { useSnackbar } from '../SnackbarProvider';
 import { useSafeSetState } from '../../hooks/useSafeSetState';
 
 export interface FormProps {
-  onSubmit: (values: any) => Promise<string>;
+  onSubmit?: (values: any) => Promise<string>;
   onSubmitResult?: (values: any) => Promise<void>;
   title?: string;
   titleAlign?: PropTypes.Alignment;
@@ -94,15 +94,18 @@ export const Form: FC<FormProps> = ({
 
   const handleOnSubmit = useCallback((values) => {
     setInternalLoading(true);
-    return onSubmit(values)
-      .then(async (message) => {
-        setInternalLoading(false);
-        showSnackbar({ message, severity: 'success' });
-      })
-      .catch(({ message }: CognitoError) => {
-        setInternalLoading(false);
-        showSnackbar({ message, severity: 'error' });
-      });
+    return (
+      onSubmit &&
+      onSubmit(values)
+        .then(async (message) => {
+          setInternalLoading(false);
+          showSnackbar({ message, severity: 'success' });
+        })
+        .catch(({ message }: CognitoError) => {
+          setInternalLoading(false);
+          showSnackbar({ message, severity: 'error' });
+        })
+    );
   }, []);
 
   const defaultValidate = useCallback(

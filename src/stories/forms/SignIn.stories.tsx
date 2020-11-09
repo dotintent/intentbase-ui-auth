@@ -7,6 +7,4 @@ export default {
   component: SignIn,
 } as Meta;
 
-const Template: Story<SignInProps> = (args) => <SignIn {...args} />;
-
-export const Default = Template.bind({});
+export const Default: Story<SignInProps> = (args) => <SignIn {...args} />;

@@ -8,21 +8,11 @@ export default {
   component: SignUp,
 } as Meta;
 
-const Template: Story<SignUpProps> = (args) => <SignUp {...args} onSubmit={args.onSubmit} />;
+export const Default: Story<SignUpProps> = (args) => <SignUp {...args} onSubmit={args.onSubmit} />;
 
-export const Default = Template.bind({});
-Default.args = {
-  onSubmit: async (values) => console.log(values),
-};
-
-const TemplateCustomFields: Story<SignUpProps> = (args) => (
+export const CustomFields: Story<SignUpProps> = (args) => (
   <SignUp {...args} onSubmit={args.onSubmit}>
     <FormInput source="firstName" />
     <FormInput source="lastName" required />
   </SignUp>
 );
-
-export const CustomFields = TemplateCustomFields.bind({});
-CustomFields.args = {
-  onSubmit: async (values) => console.log(values),
-};

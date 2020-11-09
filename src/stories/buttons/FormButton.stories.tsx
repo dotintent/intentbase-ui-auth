@@ -7,9 +7,21 @@ export default {
   component: FormButton,
 } as Meta;
 
-const Template: Story<FormButtonProps> = (args) => <FormButton {...args}>Click me!</FormButton>;
+export const Default: Story<FormButtonProps> = (args) => (
+  <FormButton {...args}>Click me!</FormButton>
+);
 
-export const Primary = Template.bind({});
-Primary.args = {
-  color: 'primary',
+export const Color = Default.bind({});
+Color.args = {
+  color: 'inherit',
+};
+
+export const Loading = Default.bind({});
+Loading.args = {
+  loading: true,
+};
+
+export const Disabled = Default.bind({});
+Disabled.args = {
+  disabled: true,
 };

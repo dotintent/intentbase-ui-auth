@@ -22,7 +22,7 @@ const getDisplayDuration = (message: string): number => {
   return min(max(msgLength * 50, 2000), 7000);
 };
 
-interface ShowSnackbarProps {
+export interface ShowSnackbarProps {
   message: string;
   severity?: Color;
   position?: SnackbarOrigin;
@@ -45,12 +45,16 @@ export const SnackbarContextProvider: FC = ({ children }) => {
     message,
     severity = 'info',
     position = initPosition,
-    duration = getDisplayDuration(message),
+    duration,
   }: ShowSnackbarProps) => {
     setMessageInternal(message);
     setSeverityInternal(severity);
     setPositionInternal(position);
-    setDurationInternal(duration);
+    if (duration) {
+      setDurationInternal(duration);
+    } else {
+      setDurationInternal(getDisplayDuration(message));
+    }
     setOpen(true);
   };
 

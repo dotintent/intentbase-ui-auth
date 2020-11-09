@@ -46,7 +46,7 @@ export const MuiFormTextField: FC<MuiFormTextFieldProps> = ({
                 onClick={togglePasswordMask}
                 onMouseDown={handleMouseDownPassword}
               >
-                {passwordIsMasked ? <Visibility /> : <VisibilityOff />}
+                {passwordIsMasked ? <Visibility /> : <VisibilityOff color="primary" />}
               </IconButton>
             </InputAdornment>
           ),
