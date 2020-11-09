@@ -17,8 +17,8 @@ Default.args = {
 
 const TemplateCustomFields: Story<SignUpProps> = (args) => (
   <SignUp {...args} onSubmit={args.onSubmit}>
-    <FormInput id="firstName" name="firstName" label="First Name" />
-    <FormInput id="lastName" name="lastName" label="Last Name" required />
+    <FormInput source="firstName" />
+    <FormInput source="lastName" required />
   </SignUp>
 );
 

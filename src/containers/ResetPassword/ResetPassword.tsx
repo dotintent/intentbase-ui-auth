@@ -1,8 +1,15 @@
-import React, { FC, useCallback, useEffect } from 'react';
+import React, {
+  Children,
+  cloneElement,
+  FC,
+  isValidElement,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { PropTypes, Typography } from '@material-ui/core';
 import { Form } from 'react-final-form';
 import { ValidationErrors } from 'final-form';
-import { useSafeSetState } from '../../hooks/useSafeSetState';
 import { FormInput } from '../../components/FormInput/FormInput';
 import { FormButton } from '../../components/FormButton';
 import {
@@ -11,11 +18,15 @@ import {
   SubHeader,
 } from '../../components/FormContainers.styled';
 import { Header } from '../../components/Header';
+import { useSnackbar } from '../../components/SnackbarProvider';
+import { useSafeSetState } from '../../hooks/useSafeSetState';
+import { defaultAuthValidation } from '../../utils/validations';
 
 export interface ResetPasswordProps {
   onSubmit: (values: any) => Promise<any>;
   title?: string | Element;
   titleAlign?: PropTypes.Alignment;
+  subtitle?: string | Element;
   resetPasswordButtonLabel?: string;
   codeLabel?: string;
   passwordLabel?: string;
@@ -35,6 +46,7 @@ export const ResetPassword: FC<ResetPasswordProps> = ({
   validate,
   title = 'Reset your password',
   titleAlign = 'center',
+  subtitle = 'Please check your email for the ont-time code to rest your password.',
   resetPasswordButtonLabel = 'Reset password',
   codeLabel = 'Code',
   passwordLabel = 'Password',
@@ -44,8 +56,11 @@ export const ResetPassword: FC<ResetPasswordProps> = ({
   loading = false,
   autoFocus = false,
   passwordPreview = true,
+  children,
 }) => {
   const [internalLoading, setInternalLoading] = useSafeSetState<boolean>(loading);
+  const [requiredChildren, setRequiredChildren] = useState<Array<string>>([]);
+  const showSnackbar = useSnackbar();
 
   useEffect(() => {
     setInternalLoading(loading);
@@ -56,24 +71,19 @@ export const ResetPassword: FC<ResetPasswordProps> = ({
     return onSubmit(values)
       .then(() => {
         setInternalLoading(false);
+        showSnackbar({ message: 'Lorem ipsum', severity: 'success' });
       })
       .catch((error) => {
         setInternalLoading(false);
-        return error;
+        showSnackbar({ message: error, severity: 'error' });
       });
   }, []);
 
   const defaultValidate = useCallback((values: any) => {
-    const errors: any = {};
-    const requiredMessage = 'Required';
-
-    if (!values.email) {
-      errors.email = requiredMessage;
-    }
-    if (!values.code) {
-      errors.code = requiredMessage;
-    }
-
+    const errors: any = defaultAuthValidation(values, requiredChildren, false, [
+      'password',
+      'code',
+    ]);
     return validate ? { ...errors, ...validate(values) } : errors;
   }, []);
 
@@ -81,8 +91,8 @@ export const ResetPassword: FC<ResetPasswordProps> = ({
     <div>
       <Header align={titleAlign}>{title}</Header>
       <SubHeader>
-        <Typography variant="body1" align={titleAlign} gutterBottom>
-          Please check your email for the ont-time code to rest your password.
+        <Typography variant="body1" gutterBottom>
+          {subtitle}
         </Typography>
       </SubHeader>
       <Form
@@ -94,23 +104,33 @@ export const ResetPassword: FC<ResetPasswordProps> = ({
             <FormInputsContainer>
               <FormInput
                 autoFocus={autoFocus}
-                id="code"
-                name="code"
+                source="code"
                 required
                 label={codeLabel}
                 disabled={internalLoading}
                 variant={inputVariant}
               />
               <FormInput
-                id="password"
-                name="password"
-                type="password"
+                source="password"
                 required
                 passwordPreview={passwordPreview}
                 label={passwordLabel}
                 disabled={internalLoading}
                 variant={inputVariant}
               />
+              {Children.map(children, (child) => {
+                if (isValidElement(child)) {
+                  const { props } = child;
+                  if (props.required) {
+                    setRequiredChildren((prevState) => {
+                      prevState.push(props.id || props.source);
+                      return prevState;
+                    });
+                  }
+                  return cloneElement(child, {}, null);
+                }
+                return child;
+              })}
             </FormInputsContainer>
             <FormActionsContainer>
               <FormButton

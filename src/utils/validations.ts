@@ -25,21 +25,42 @@ export const isChildrenRequired = (values: any, requiredChildren: Array<string>)
   return errors;
 };
 
-export const defaultAuthValidation = (values: any, requiredChildren: Array<string>): any => {
+export const defaultAuthValidation = (
+  values: any,
+  requiredChildren: Array<string>,
+  repeatPassword = false,
+  validate = ['email', 'password'],
+): any => {
   const errors: any = isChildrenRequired(values, requiredChildren);
   const requiredMessage = 'Required';
 
-  if (!values.email) {
-    errors.email = requiredMessage;
-  } else if (!isValidEmail(values.email)) {
-    errors.email = 'Invalid email.';
+  if (validate.includes('email')) {
+    if (!values.email) {
+      errors.email = requiredMessage;
+    } else if (!isValidEmail(values.email)) {
+      errors.email = 'Invalid email.';
+    }
   }
 
-  if (!values.password) {
-    errors.password = requiredMessage;
-  } else if (!isValidPassword(values.password)) {
-    errors.password =
-      'Password must contain at least 8 characters, 1 letter, 1 number and 1 special character.';
+  if (validate.includes('password')) {
+    if (!values.password) {
+      errors.password = requiredMessage;
+    } else if (!isValidPassword(values.password)) {
+      errors.password =
+        'Password must contain at least 8 characters, 1 letter, 1 number and 1 special character.';
+    }
+
+    if (repeatPassword && !values.passwordRepeat) {
+      errors.passwordRepeat = requiredMessage;
+    } else if (repeatPassword && values.password !== values.passwordRepeat) {
+      errors.passwordRepeat = 'Password confirmation does not match.';
+    }
+  }
+
+  if (validate.includes('code')) {
+    if (!values.code) {
+      errors.password = requiredMessage;
+    }
   }
 
   return errors;

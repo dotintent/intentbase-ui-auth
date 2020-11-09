@@ -81,7 +81,7 @@ function mapCognitoUser(user: any): CognitoUser | undefined {
  * as it's supposed to be called only once in your React tree.
  * Use `useAuthContext()` instead.
  */
-export function useCognitoUser(): {
+export function useUser(): {
   user?: CognitoUser;
   loading: boolean;
 } {

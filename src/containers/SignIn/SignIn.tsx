@@ -11,7 +11,7 @@ import { PropTypes } from '@material-ui/core';
 import { Form } from 'react-final-form';
 import { ValidationErrors } from 'final-form';
 import { Auth } from 'aws-amplify';
-import { useSafeSetState } from '../../hooks/useSafeSetState';
+import clsx from 'clsx';
 import { FormInput } from '../../components/FormInput/FormInput';
 import { FormButton } from '../../components/FormButton';
 import { FormActionsContainer, FormInputsContainer } from '../../components/FormContainers.styled';
@@ -21,6 +21,8 @@ import { isObjectEmpty } from '../../utils/isObjectEmpty';
 import { CognitoUser } from '../../hooks/useUser';
 import { CognitoError } from '../../common/interfaces/CognitoError';
 import { StyledForgotPassword } from './SignIn.styled';
+import { useSnackbar } from '../../components/SnackbarProvider';
+import { useSafeSetState } from '../../hooks/useSafeSetState';
 
 export interface SignInProps {
   onSubmit: (values: any) => Promise<any>;
@@ -41,6 +43,7 @@ export interface SignInProps {
   loading?: boolean;
   autoFocus?: boolean;
   passwordPreview?: boolean;
+  className?: string;
 }
 
 export const SignIn: FC<SignInProps> = ({
@@ -59,6 +62,7 @@ export const SignIn: FC<SignInProps> = ({
   loading = false,
   autoFocus = false,
   passwordPreview = true,
+  className,
   children,
 }) => {
   const [internalLoading, setInternalLoading] = useSafeSetState<boolean>(loading);
@@ -67,6 +71,7 @@ export const SignIn: FC<SignInProps> = ({
   const [cognitoUserSession, setCognitoUserSession] = useState<CognitoUser>();
   const [cognitoError, setCognitoError] = useState<string>();
   const [loggedIn, setLoggedIn] = useState(false);
+  const showSnackbar = useSnackbar();
 
   console.log(
     'L:71 | cognitoError, cognitoUser, cognitoUserSession, loggedIn: ',
@@ -82,7 +87,6 @@ export const SignIn: FC<SignInProps> = ({
 
   const signIn = useCallback((values) => {
     setInternalLoading(true);
-    console.log('test');
     return Auth.signIn({
       username: values.email,
       password: values.password,
@@ -93,46 +97,45 @@ export const SignIn: FC<SignInProps> = ({
         setLoggedIn(true);
         await onSubmit(values);
         setInternalLoading(false);
-        return true;
+        showSnackbar({ message: 'Successful login.', severity: 'success' });
       })
       .catch((error: CognitoError) => {
-        console.log('L:91 | error: ', error);
         setCognitoError(error.message);
         setInternalLoading(false);
+        showSnackbar({ message: error.message, severity: 'error' });
       });
   }, []);
 
   const defaultValidate = useCallback(
     (values: any) => {
-      const errors: any = defaultAuthValidation(values, requiredChildren);
+      const errors: any = defaultAuthValidation(values, requiredChildren, false, ['email']);
       return validate ? { ...errors, ...validate(values, requiredChildren) } : errors;
     },
     [requiredChildren, validate],
   );
 
   return (
-    <div>
-      <Header align={titleAlign}>{title}</Header>
+    <div className={clsx(className, 'signIn')}>
+      <Header className="signIn__header--title" align={titleAlign}>
+        {title}
+      </Header>
       <Form
         onSubmit={signIn}
         initialValues={initialValues}
         validate={replacementValidate || defaultValidate}
         render={({ handleSubmit, pristine, errors }) => (
-          <form onSubmit={handleSubmit}>
-            <FormInputsContainer>
+          <form onSubmit={handleSubmit} className="signIn__form">
+            <FormInputsContainer className="signIn__form__inputs">
               <FormInput
                 autoFocus={autoFocus}
-                id="email"
-                name="email"
+                source="email"
                 required
                 label={emailLabel}
                 disabled={internalLoading}
                 variant={inputVariant}
               />
               <FormInput
-                id="password"
-                name="password"
-                type="password"
+                source="password"
                 required
                 passwordPreview={passwordPreview}
                 label={passwordLabel}
@@ -144,7 +147,7 @@ export const SignIn: FC<SignInProps> = ({
                   const { props } = child;
                   if (props.required) {
                     setRequiredChildren((prevState) => {
-                      prevState.push(props.id);
+                      prevState.push(props.id || props.source);
                       return prevState;
                     });
                   }
@@ -153,10 +156,11 @@ export const SignIn: FC<SignInProps> = ({
                 return child;
               })}
             </FormInputsContainer>
-            <FormActionsContainer>
+            <FormActionsContainer className="signIn__form__actions">
               {onForgotPasswordClick && (
                 <StyledForgotPassword
                   color="primary"
+                  className="signIn__form__btn--forgotPassword"
                   variant="body1"
                   onClick={onForgotPasswordClick}
                 >
@@ -165,6 +169,7 @@ export const SignIn: FC<SignInProps> = ({
               )}
               <FormButton
                 type="submit"
+                className="signIn__form__btn--submit"
                 loading={internalLoading}
                 disabled={internalLoading || pristine || !isObjectEmpty(errors)}
                 fullWidth
