@@ -45,7 +45,7 @@ export const SnackbarContextProvider: FC = ({ children }) => {
     message,
     severity = 'info',
     position = initPosition,
-    duration = getDisplayDuration(messageInternal),
+    duration = getDisplayDuration(message),
   }: ShowSnackbarProps) => {
     setMessageInternal(message);
     setSeverityInternal(severity);

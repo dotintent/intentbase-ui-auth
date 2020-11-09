@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Typography } from '@material-ui/core';
+import { Typography, TypographyProps } from '@material-ui/core';
 
 export const FormActionsContainer = styled.div`
   display: flex;
@@ -21,12 +21,12 @@ export const FormLink = styled(Typography)`
   cursor: pointer;
 `;
 
-export const FormSectionSubtitle = styled.div`
+export const FormSubheaderContent = styled.div`
   display: flex;
 `;
 
-export const FormSectionTitle = styled(Typography)`
-  font-weight: 900;
+export const FormSubheaderTitle = styled(Typography)<TypographyProps>`
+  font-weight: ${({ variant }) => variant === 'h5' && 900};
 `;
 
 export const SubHeader = styled.div`

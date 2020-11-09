@@ -7,11 +7,6 @@ export default {
   component: SignIn,
 } as Meta;
 
-const Template: Story<SignInProps> = (args) => <SignIn {...args} onSubmit={args.onSubmit} />;
+const Template: Story<SignInProps> = (args) => <SignIn {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
-  onSubmit: async (values) => {
-    alert(values.email + values.password);
-  },
-};
