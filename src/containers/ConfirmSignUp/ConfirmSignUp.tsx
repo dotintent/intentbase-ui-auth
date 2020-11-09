@@ -1,8 +1,57 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import clsx from 'clsx';
+import styled from 'styled-components';
 import { FormInput } from '../../components/FormInput/FormInput';
-import { Form, FormWithDefaultsProps } from '../../components/Form/Form';
+import { Form, FormActionsProps, FormWithDefaultsProps } from '../../components/Form/Form';
+import { FormButton } from '../../components/FormButton';
+import { useSnackbar } from '../../components/SnackbarProvider';
+import { CognitoError } from '../../common/interfaces/CognitoError';
+
+const FormActionsContainer = styled.div`
+  margin-bottom: 20px;
+  width: 100%;
+`;
+
+interface ResendConfirmationCodeProps extends FormActionsProps {
+  resendCodeLabel?: string;
+}
+
+const ResendConfirmationCode: FC<ResendConfirmationCodeProps> = ({
+  resendCodeLabel = 'Resend confirmation code',
+  values,
+  loading,
+}) => {
+  const [internalLoading, setInternalLoading] = useState(false);
+  const showSnackbar = useSnackbar();
+
+  const resendCode = useCallback(async () => {
+    setInternalLoading(true);
+    await Auth.resendSignUp(values.email)
+      .then(() => {
+        showSnackbar({ message: 'Confirmation code successfully resend.', severity: 'success' });
+      })
+      .catch(({ message }: CognitoError) => {
+        showSnackbar({ message, severity: 'error' });
+      })
+      .finally(() => {
+        setInternalLoading(false);
+      });
+  }, [values.email]);
+
+  return (
+    <FormActionsContainer>
+      <FormButton
+        color="default"
+        disabled={loading || internalLoading}
+        fullWidth
+        onClick={resendCode}
+      >
+        {resendCodeLabel}
+      </FormButton>
+    </FormActionsContainer>
+  );
+};
 
 export const ConfirmSignUp: FC<FormWithDefaultsProps> = ({
   onSubmitResult,
@@ -37,6 +86,7 @@ export const ConfirmSignUp: FC<FormWithDefaultsProps> = ({
       defaultValidationFields={['email', 'code']}
       className={clsx(className, 'confirmSignUp')}
       confirmButtonLabel={confirmButtonLabel}
+      formActionsBeforeConfirm={<ResendConfirmationCode />}
     >
       <FormInput autoFocus={autoFocus} source="email" required label={emailLabel} />
       <FormInput source="code" required label={codeLabel} />

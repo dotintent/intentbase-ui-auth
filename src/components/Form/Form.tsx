@@ -48,7 +48,8 @@ export interface FormProps {
   subheaderTitle?: string;
   subheaderTitleVariant?: Variant;
   subheaderContent?: string | JSX.Element;
-  formActions?: JSX.Element;
+  formActionsBeforeConfirm?: JSX.Element;
+  formActionsAfterConfirm?: JSX.Element;
 }
 
 export interface FormWithDefaultsProps extends FormProps {
@@ -57,6 +58,11 @@ export interface FormWithDefaultsProps extends FormProps {
   passwordLabel?: string;
   passwordPreview?: boolean;
   passwordRepeat?: boolean;
+}
+
+export interface FormActionsProps {
+  values?: any;
+  loading?: boolean;
 }
 
 export const Form: FC<FormProps> = ({
@@ -75,7 +81,8 @@ export const Form: FC<FormProps> = ({
   subheaderTitle,
   subheaderTitleVariant = 'h5',
   subheaderContent,
-  formActions,
+  formActionsBeforeConfirm,
+  formActionsAfterConfirm,
 }) => {
   const [internalLoading, setInternalLoading] = useSafeSetState<boolean>(loading);
   const [requiredChildren, setRequiredChildren] = useState<Array<string>>([]);
@@ -140,7 +147,7 @@ export const Form: FC<FormProps> = ({
         onSubmit={handleOnSubmit}
         initialValues={initialValues}
         validate={replacementValidate || defaultValidate}
-        render={({ handleSubmit, pristine, errors }) => (
+        render={({ handleSubmit, pristine, errors, values }) => (
           <form onSubmit={handleSubmit} className="form__container">
             <FormInputsContainer className="form__container__inputs">
               {Children.map(children, (child) => {
@@ -155,7 +162,7 @@ export const Form: FC<FormProps> = ({
                   return cloneElement(
                     child,
                     {
-                      disabled: internalLoading,
+                      loading: internalLoading,
                       variant: inputVariant,
                     },
                     null,
@@ -165,7 +172,11 @@ export const Form: FC<FormProps> = ({
               })}
             </FormInputsContainer>
             <FormActionsContainer className="form__container__actions">
-              {formActions && formActions}
+              {formActionsBeforeConfirm &&
+                cloneElement(formActionsBeforeConfirm, {
+                  loading: internalLoading,
+                  values,
+                })}
               <FormButton
                 type="submit"
                 className="form__action__btn--submit"
@@ -175,6 +186,11 @@ export const Form: FC<FormProps> = ({
               >
                 {confirmButtonLabel}
               </FormButton>
+              {formActionsAfterConfirm &&
+                cloneElement(formActionsAfterConfirm, {
+                  loading: internalLoading,
+                  values,
+                })}
             </FormActionsContainer>
           </form>
         )}

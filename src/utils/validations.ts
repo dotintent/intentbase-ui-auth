@@ -1,9 +1,19 @@
 export const hasValidLength = (value: string, length = 8): boolean => value.length >= length;
-export const hasLetter = (value: string): boolean => /[a-zA-Z]/.test(value);
-export const hasNumeric = (value: string): boolean => /[0-9]/.test(value);
-export const hasSpecialChar = (value: string): boolean => /[^A-Za-z0-9]/.test(value);
-export const hasUppercaseLetter = (value: string): boolean => /[A-Z]/.test(value);
-export const hasLowercaseLetter = (value: string): boolean => /[a-z]/.test(value);
+
+export const hasLetter = (value: string, quantity = 1): boolean =>
+  new RegExp(`[a-zA-Z]{${quantity}}`).test(value);
+
+export const hasNumeric = (value: string, quantity = 1): boolean =>
+  new RegExp(`[0-9]{${quantity}}`).test(value);
+
+export const hasSpecialChar = (value: string, quantity = 1): boolean =>
+  new RegExp(`[^A-Za-z0-9]{${quantity}}`).test(value);
+
+export const hasUppercaseLetter = (value: string, quantity = 1): boolean =>
+  new RegExp(`[A-Z]{${quantity}}`).test(value);
+
+export const hasLowercaseLetter = (value: string, quantity = 1): boolean =>
+  new RegExp(`[a-z]{${quantity}}`).test(value);
 
 export const composeValidation = (...fns: Array<any>) => (value?: string): boolean =>
   fns.reduceRight((acc, fn) => [...acc, fn(value)], []).every(Boolean);

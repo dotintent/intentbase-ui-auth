@@ -42,7 +42,6 @@ export const SignIn: FC<SignInProps> = ({
       Auth.signIn({
         username: values.email,
         password: values.password,
-        ...values,
       }).then(async (user) => {
         setCognitoUser(user);
         setCognitoUserSession(user.signInUserSession);
@@ -61,7 +60,7 @@ export const SignIn: FC<SignInProps> = ({
       defaultValidationFields={['email', 'password']}
       confirmButtonLabel={confirmButtonLabel}
       className={clsx(className, 'signIn')}
-      formActions={
+      formActionsBeforeConfirm={
         forgotPasswordLabel && forgotPasswordLabel ? (
           <StyledForgotPassword
             color="primary"
