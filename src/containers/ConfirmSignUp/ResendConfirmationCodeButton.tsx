@@ -29,7 +29,10 @@ export const ResendConfirmationCodeButton: FC<ResendConfirmationCodeProps> = ({
 
   const resendCode = useCallback(async () => {
     setInternalLoading(true);
-    await Auth.resendSignUp(values.email)
+    const { email } = values;
+    const formattedEmail = email.trim().toLowerCase();
+
+    await Auth.resendSignUp(formattedEmail)
       .then(() => {
         showSnackbar({ message: onSuccessResendMsg, severity: 'success' });
       })

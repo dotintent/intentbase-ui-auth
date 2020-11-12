@@ -27,14 +27,15 @@ export const ConfirmSignUp: FC<ConfirmSignUpProps> = ({
   resendButtonColor = 'default',
   ...rest
 }) => {
-  const confirmSignUp = useCallback(
-    async (values: any) =>
-      Auth.confirmSignUp(values.email, values.code).then(async (result) => {
-        onSubmitResult && (await onSubmitResult(result));
-        return onSuccessLoginMsg;
-      }),
-    [],
-  );
+  const confirmSignUp = useCallback(async (values: any) => {
+    const { email, code } = values;
+    const formattedEmail = email.trim().toLowerCase();
+
+    return Auth.confirmSignUp(formattedEmail, code).then(async (result) => {
+      onSubmitResult && (await onSubmitResult(result));
+      return onSuccessLoginMsg;
+    });
+  }, []);
 
   const formActionsBeforeConfirm = (
     <ResendConfirmationCodeButton

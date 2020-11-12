@@ -36,23 +36,24 @@ export const SignUp: FC<SignUpProps> = ({
   const [cognitoUserSession, setCognitoUserSession] = useState<any>();
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const signUp = useCallback(
-    async (values: any): Promise<string> =>
-      Auth.signUp({
-        username: values.email,
-        password: values.password,
-        attributes: {
-          email: values.email,
-        },
-      }).then(async (result) => {
-        setCognitoUser(result.user);
-        setCognitoUserSession(result.user.getSignInUserSession());
-        setLoggedIn(true);
-        onSubmitResult && (await onSubmitResult(result));
-        return onSuccessLoginMsg;
-      }),
-    [],
-  );
+  const signUp = useCallback(async (values: any): Promise<string> => {
+    const { email, password } = values;
+    const formattedEmail = email.trim().toLowerCase();
+
+    return Auth.signUp({
+      username: formattedEmail,
+      password,
+      attributes: {
+        email: formattedEmail,
+      },
+    }).then(async (result) => {
+      setCognitoUser(result.user);
+      setCognitoUserSession(result.user.getSignInUserSession());
+      setLoggedIn(true);
+      onSubmitResult && (await onSubmitResult(result));
+      return onSuccessLoginMsg;
+    });
+  }, []);
 
   const SubheaderContent = () => (
     <>

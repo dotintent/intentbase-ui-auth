@@ -30,20 +30,21 @@ export const SignIn: FC<SignInProps> = ({
   const [cognitoUserSession, setCognitoUserSession] = useState<CognitoUser>();
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const signIn = useCallback(
-    async (values): Promise<string> =>
-      Auth.signIn({
-        username: values.email.trim().toLowerCase(),
-        password: values.password,
-      }).then(async (user) => {
-        setCognitoUser(user);
-        setCognitoUserSession(user.signInUserSession);
-        setLoggedIn(true);
-        onSubmitResult && (await onSubmitResult(user));
-        return onSuccessLoginMsg;
-      }),
-    [],
-  );
+  const signIn = useCallback(async (values): Promise<string> => {
+    const { email, password } = values;
+    const formattedEmail = email.trim().toLowerCase();
+
+    return Auth.signIn({
+      username: formattedEmail,
+      password,
+    }).then(async (user) => {
+      setCognitoUser(user);
+      setCognitoUserSession(user.signInUserSession);
+      setLoggedIn(true);
+      onSubmitResult && (await onSubmitResult(user));
+      return onSuccessLoginMsg;
+    });
+  }, []);
 
   return (
     <Form
