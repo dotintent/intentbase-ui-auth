@@ -18,7 +18,7 @@ interface IntentbaseProps {
 
 export const IntentbaseProvider: FC<IntentbaseProps> = ({
   children,
-  region = 'eu-central-1',
+  region = 'us-east-1',
   userPoolId,
   userPoolWebClientId,
   theme = defaultTheme,

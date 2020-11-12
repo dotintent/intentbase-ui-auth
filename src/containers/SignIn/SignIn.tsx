@@ -30,17 +30,10 @@ export const SignIn: FC<SignInProps> = ({
   const [cognitoUserSession, setCognitoUserSession] = useState<CognitoUser>();
   const [loggedIn, setLoggedIn] = useState(false);
 
-  console.log(
-    'L:71 | cognitoUser, cognitoUserSession, loggedIn: ',
-    cognitoUser,
-    cognitoUserSession,
-    loggedIn,
-  );
-
   const signIn = useCallback(
     async (values): Promise<string> =>
       Auth.signIn({
-        username: values.email,
+        username: values.email.trim().toLowerCase(),
         password: values.password,
       }).then(async (user) => {
         setCognitoUser(user);

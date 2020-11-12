@@ -76,10 +76,8 @@ export const defaultAuthValidation = (
     }
   }
 
-  if (validate.includes('code')) {
-    if (!values.code) {
-      errors.password = requiredMessage;
-    }
+  if (validate.includes('code') && !values.code) {
+    errors.password = requiredMessage;
   }
 
   return errors;

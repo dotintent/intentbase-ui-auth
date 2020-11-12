@@ -5,11 +5,13 @@ import { Typography } from '@material-ui/core';
 import { Form, FormWithDefaultsProps } from '../../components/Form/Form';
 import { FormInput } from '../../components/FormInput/FormInput';
 import { FormLink } from '../../components/Form/Form.styled';
+import { TypographyColor } from '../../common/interfaces/MaterialUI';
 
 export interface SignUpProps extends FormWithDefaultsProps {
   onClickSignIn?: () => void;
   subheaderHaveAnAccount?: string;
   subheaderSignIn?: string;
+  subheaderSignInBtnColor?: TypographyColor;
 }
 
 export const SignUp: FC<SignUpProps> = ({
@@ -27,18 +29,12 @@ export const SignUp: FC<SignUpProps> = ({
   passwordPreview = true,
   children,
   className,
+  subheaderSignInBtnColor = 'primary',
   ...rest
 }) => {
   const [cognitoUser, setCognitoUser] = useState<any>();
   const [cognitoUserSession, setCognitoUserSession] = useState<any>();
   const [loggedIn, setLoggedIn] = useState(false);
-
-  console.log(
-    'L:71 | cognitoUser, cognitoUserSession, loggedIn: ',
-    cognitoUser,
-    cognitoUserSession,
-    loggedIn,
-  );
 
   const signUp = useCallback(
     async (values: any): Promise<string> =>
@@ -68,7 +64,7 @@ export const SignUp: FC<SignUpProps> = ({
       &nbsp;
       {onClickSignIn && subheaderSignIn && (
         <FormLink
-          color="primary"
+          color={subheaderSignInBtnColor}
           className="signUp__subheader__section--link"
           onClick={onClickSignIn}
         >

@@ -6,7 +6,7 @@ import { Form, FormWithDefaultsProps } from '../../components/Form/Form';
 export const ResetPassword: FC<FormWithDefaultsProps> = ({
   onSubmitResult,
   title = 'Reset your password',
-  subheaderTitle = 'Please check your email for the ont-time code to rest your password.',
+  subheaderTitle = 'Please check your email for the one-time code to reset your password.',
   subheaderTitleVariant = 'body1',
   confirmButtonLabel = 'Reset password',
   codeLabel = 'Code',

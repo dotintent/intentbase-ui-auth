@@ -32,7 +32,7 @@ export const MuiFormTextField: FC<MuiFormTextFieldProps> = ({
   if (inputProps.type === 'password' && passwordPreview) {
     return (
       <StyledTextField
-        error={!!(touched && error)}
+        error={Boolean(touched && error)}
         helperText={touched && error}
         {...inputProps}
         {...rest}

@@ -5,12 +5,13 @@ import { FormActionsProps } from '../../components/Form/Form';
 import { useSnackbar } from '../../hooks/useSnackbar';
 import { CognitoError } from '../../common/interfaces/CognitoError';
 import { FormButton } from '../../components/FormButton';
-import { FormActionsContainer } from '../../components/Form/Form.styled';
+import { StyledFormActionsContainer } from './ResendConfirmationCodeButton.styled';
 
 export interface ResendConfirmationCodeBaseProps {
   resendCodeLabel?: string;
   onSuccessResendMsg?: string;
   resendButtonColor?: PropTypes.Color;
+  fullWidth?: boolean;
 }
 
 type ResendConfirmationCodeProps = ResendConfirmationCodeBaseProps & FormActionsProps;
@@ -19,6 +20,7 @@ export const ResendConfirmationCodeButton: FC<ResendConfirmationCodeProps> = ({
   resendCodeLabel = 'Resend confirmation code',
   onSuccessResendMsg = 'Confirmation code resend successfully.',
   resendButtonColor = 'default',
+  fullWidth = true,
   values,
   loading,
 }) => {
@@ -40,15 +42,15 @@ export const ResendConfirmationCodeButton: FC<ResendConfirmationCodeProps> = ({
   }, [values.email]);
 
   return (
-    <FormActionsContainer>
+    <StyledFormActionsContainer>
       <FormButton
         color={resendButtonColor}
         disabled={loading || internalLoading}
-        fullWidth
+        fullWidth={fullWidth}
         onClick={resendCode}
       >
         {resendCodeLabel}
       </FormButton>
-    </FormActionsContainer>
+    </StyledFormActionsContainer>
   );
 };

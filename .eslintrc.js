@@ -17,7 +17,7 @@ module.exports = {
     'no-alert': 0,
     'no-console': 0,
     'no-unused-vars': [
-      2,
+      1,
       {
         vars: 'all',
         args: 'after-used',
