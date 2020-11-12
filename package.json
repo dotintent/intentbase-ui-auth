@@ -26,8 +26,9 @@
   "scripts": {
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll",
-    "build": "tsc --project tsconfig.json",
+    "build": "yarn clean && tsc --project tsconfig.json",
     "build:watch": "yarn build -w",
+    "clean": "rimraf dist",
     "type-check": "tsc",
     "format": "prettier --write --config .prettierrc .",
     "format:check": "prettier --check --config .prettierrc .",

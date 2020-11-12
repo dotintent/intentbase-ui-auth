@@ -36,7 +36,7 @@ export interface FormProps {
   onSuccessLoginMsg?: string;
   initialValues?: any;
   inputVariant?: 'filled' | 'outlined' | 'standard';
-  defaultValidationFields: DefaultAuthValidationOptions;
+  defaultValidationFields?: DefaultAuthValidationOptions;
   validate?: (
     values: any,
     requiredChildren: Array<string>,
@@ -44,7 +44,7 @@ export interface FormProps {
   replacementValidate?: (values: any) => ValidationErrors | Promise<ValidationErrors>;
   loading?: boolean;
   className?: string;
-  confirmButtonLabel: string;
+  confirmButtonLabel?: string;
   subheaderTitle?: string;
   subheaderTitleVariant?: Variant;
   subheaderContent?: string | JSX.Element;
@@ -71,13 +71,13 @@ export const Form: FC<FormProps> = ({
   titleAlign = 'center',
   initialValues = {},
   inputVariant = 'outlined',
-  defaultValidationFields,
+  defaultValidationFields = [],
   validate,
   replacementValidate,
   loading = false,
   className,
   children,
-  confirmButtonLabel,
+  confirmButtonLabel = 'Submit',
   subheaderTitle,
   subheaderTitleVariant = 'h5',
   subheaderContent,
