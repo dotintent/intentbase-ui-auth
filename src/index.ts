@@ -6,4 +6,5 @@ export { ConfirmSignUp } from './containers/ConfirmSignUp/ConfirmSignUp';
 export { ResendConfirmationCodeButton } from './containers/ConfirmSignUp/ResendConfirmationCodeButton';
 export { useUser } from './hooks/useUser';
 export { useSnackbar } from './hooks/useSnackbar';
+export { PageLoading } from './components/PageLoading/PageLoading';
 export { styled } from './theme';
