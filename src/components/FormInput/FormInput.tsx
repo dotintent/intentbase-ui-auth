@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { BaseTextFieldProps } from '@material-ui/core';
 import { Field } from 'react-final-form';
 import clsx from 'clsx';
-import { MuiFormTextField } from './MuiFormTextField';
+import { MuiFormTextField } from '../MuiFormTextField/MuiFormTextField';
 
 export interface FormInputProps extends BaseTextFieldProps {
   id?: string;

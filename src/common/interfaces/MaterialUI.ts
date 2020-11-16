@@ -6,3 +6,5 @@ export type TypographyColor =
   | 'textPrimary'
   | 'textSecondary'
   | 'error';
+
+export type ButtonVariant = 'text' | 'outlined' | 'contained';

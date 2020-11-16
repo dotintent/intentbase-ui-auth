@@ -4,7 +4,7 @@ import { PropTypes } from '@material-ui/core';
 import { FormActionsProps } from '../../components/Form/Form';
 import { useSnackbar } from '../../hooks/useSnackbar';
 import { CognitoError } from '../../common/interfaces/CognitoError';
-import { FormButton } from '../../components/FormButton';
+import { FormButton } from '../../components/FormButton/FormButton';
 import { StyledFormActionsContainer } from './ResendConfirmationCodeButton.styled';
 
 export interface ResendConfirmationCodeBaseProps {

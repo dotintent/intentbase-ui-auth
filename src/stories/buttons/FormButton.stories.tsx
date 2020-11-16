@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { FormButton, FormButtonProps } from '../../components/FormButton';
+import { FormButton, FormButtonProps } from '../../components/FormButton/FormButton';
 
 export default {
   title: 'Buttons/Form button',

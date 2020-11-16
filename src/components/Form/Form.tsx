@@ -12,7 +12,7 @@ import { Form as FinalForm } from 'react-final-form';
 import { ValidationErrors } from 'final-form';
 import clsx from 'clsx';
 import { Variant } from '@material-ui/core/styles/createTypography';
-import { FormButton } from '../FormButton';
+import { FormButton } from '../FormButton/FormButton';
 import {
   FormActionsContainer,
   FormInputsContainer,
@@ -20,7 +20,7 @@ import {
   FormSubheaderTitle,
   SubHeader,
 } from './Form.styled';
-import { Header } from '../Header';
+import { Header } from '../Header/Header';
 import { defaultAuthValidation, DefaultAuthValidationOptions } from '../../utils/validations';
 import { isObjectEmpty } from '../../utils/isObjectEmpty';
 import { CognitoError } from '../../common/interfaces/CognitoError';

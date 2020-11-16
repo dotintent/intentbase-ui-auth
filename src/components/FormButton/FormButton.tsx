@@ -1,16 +1,6 @@
 import React, { FC } from 'react';
-import { Button, ButtonProps, CircularProgress, CircularProgressProps } from '@material-ui/core';
-import styled from 'styled-components';
-
-const StyledButton = styled(Button)<ButtonProps>`
-  height: 50px;
-  text-transform: none;
-  font-size: 16px;
-`;
-
-const StyledProgress = styled(CircularProgress)<CircularProgressProps>`
-  margin-right: 12px;
-`;
+import { ButtonProps } from '@material-ui/core';
+import { StyledButton, StyledProgress } from './FormButton.styled';
 
 export interface FormButtonProps extends ButtonProps {
   loading?: boolean;

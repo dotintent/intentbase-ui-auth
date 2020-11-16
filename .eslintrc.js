@@ -14,6 +14,7 @@ module.exports = {
     },
   },
   rules: {
+    'no-empty': 0,
     'no-alert': 0,
     'no-console': 0,
     'no-unused-vars': [
@@ -25,6 +26,7 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
+    'react/no-array-index-key': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-implied-eval': 0,
     'react/prop-types': 0,

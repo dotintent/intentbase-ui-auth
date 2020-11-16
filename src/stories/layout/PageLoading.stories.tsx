@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { PageLoading, PageLoadingProps } from '../../components/PageLoading/PageLoading';
 
 export default {
-  title: 'Layout/PageLoading',
+  title: 'Layout/Page loading',
   component: PageLoading,
 } as Meta;
 
