@@ -5,6 +5,7 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { defaultTheme } from '../theme';
 import { configureAmplify } from '../utils/configureAmplify';
 import { SnackbarContextProvider } from './SnackbarProvider';
+import { AuthContextProvider } from './auth/AuthProvider';
 
 type Environment = 'production' | 'development' | 'test';
 
@@ -33,11 +34,19 @@ export const IntentbaseProvider: FC<IntentbaseProps> = ({
 
   configureAmplify(region, userPoolId, userPoolWebClientId);
 
+  const fetchUser = async () => {
+    return new Promise((resolve) => {
+      resolve('joe');
+    });
+  };
+
   return (
     <StylesProvider injectFirst>
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
-          <SnackbarContextProvider>{children}</SnackbarContextProvider>
+          <AuthContextProvider getApiUser={fetchUser}>
+            <SnackbarContextProvider>{children}</SnackbarContextProvider>
+          </AuthContextProvider>
         </ThemeProvider>
       </MuiThemeProvider>
     </StylesProvider>
