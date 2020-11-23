@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { Auth } from 'aws-amplify';
+import { Auth } from '@aws-amplify/auth';
 
 import clsx from 'clsx';
 import { Variant } from '@material-ui/core/styles/createTypography';
@@ -9,15 +9,15 @@ import * as MultiStep from '../../components/MultiStep/MultiStep';
 import { ProgressBarPosition } from '../../components/MultiStep/MultiStep.styled';
 
 interface ResetPasswordProps extends FormWithDefaultsProps {
-  progressBarPosition: ProgressBarPosition;
-  sendEmailTitle: string;
-  sendEmailConfirmButtonLabel: string;
-  sendEmailSubheaderTitle: string;
-  sendEmailSubheaderVariant: Variant;
-  confirmCodeTitle: string;
-  confirmCodeConfirmButtonLabel: string;
-  confirmCodeSubheaderTitle: string;
-  confirmCodeSubheaderVariant: Variant;
+  progressBarPosition?: ProgressBarPosition;
+  sendEmailTitle?: string;
+  sendEmailConfirmButtonLabel?: string;
+  sendEmailSubheaderTitle?: string;
+  sendEmailSubheaderVariant?: Variant;
+  confirmCodeTitle?: string;
+  confirmCodeConfirmButtonLabel?: string;
+  confirmCodeSubheaderTitle?: string;
+  confirmCodeSubheaderVariant?: Variant;
 }
 
 export const ResetPassword: FC<ResetPasswordProps> = ({

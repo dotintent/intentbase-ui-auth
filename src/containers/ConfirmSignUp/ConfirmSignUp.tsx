@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from 'react';
-import { Auth } from 'aws-amplify';
+import { Auth } from '@aws-amplify/auth';
 import clsx from 'clsx';
 import { FormInput } from '../../components/FormInput/FormInput';
 import { Form, FormWithDefaultsProps } from '../../components/Form/Form';
@@ -31,7 +31,7 @@ export const ConfirmSignUp: FC<ConfirmSignUpProps> = ({
     const { email, code } = values;
     const formattedEmail = email.trim().toLowerCase();
 
-    return Auth.confirmSignUp(formattedEmail, code).then(async (result) => {
+    return Auth.confirmSignUp(formattedEmail, code).then(async (result: any) => {
       onSubmitResult && (await onSubmitResult(result));
       return onSuccessLoginMsg;
     });

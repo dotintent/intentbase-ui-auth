@@ -1,5 +1,6 @@
-import { Auth, Hub } from 'aws-amplify';
+import { Auth } from '@aws-amplify/auth';
 import { useEffect, useState, useRef } from 'react';
+import { Hub } from '@aws-amplify/core';
 
 export interface CognitoUser {
   email: string;
@@ -34,7 +35,6 @@ function mapCognitoUser(user: any): CognitoUser | undefined {
   if (
     user?.attributes?.email &&
     user?.signInUserSession?.accessToken?.jwtToken &&
-    user?.signInUserSession?.accessToken?.payload?.['cognito:groups'] &&
     user?.signInUserSession?.idToken?.jwtToken &&
     user?.signInUserSession?.refreshToken?.token
   ) {

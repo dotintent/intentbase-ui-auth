@@ -1,11 +1,11 @@
-import React, { FC, useCallback, useState } from 'react';
-import { Auth } from 'aws-amplify';
+import React, { FC } from 'react';
 import clsx from 'clsx';
 import { Typography } from '@material-ui/core';
 import { Form, FormWithDefaultsProps } from '../../components/Form/Form';
 import { FormInput } from '../../components/FormInput/FormInput';
 import { FormLink } from '../../components/Form/Form.styled';
 import { TypographyColor } from '../../common/interfaces/MaterialUI';
+import { useSignUp } from '../../hooks/useSignUp';
 
 export interface SignUpProps extends FormWithDefaultsProps {
   onClickSignIn?: () => void;
@@ -32,28 +32,7 @@ export const SignUp: FC<SignUpProps> = ({
   subheaderSignInBtnColor = 'primary',
   ...rest
 }) => {
-  const [cognitoUser, setCognitoUser] = useState<any>();
-  const [cognitoUserSession, setCognitoUserSession] = useState<any>();
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const signUp = useCallback(async (values: any): Promise<string> => {
-    const { email, password } = values;
-    const formattedEmail = email.trim().toLowerCase();
-
-    return Auth.signUp({
-      username: formattedEmail,
-      password,
-      attributes: {
-        email: formattedEmail,
-      },
-    }).then(async (result) => {
-      setCognitoUser(result.user);
-      setCognitoUserSession(result.user.getSignInUserSession());
-      setLoggedIn(true);
-      onSubmitResult && (await onSubmitResult(result));
-      return onSuccessLoginMsg;
-    });
-  }, []);
+  const signUp = useSignUp({ onSuccessSignUpMsg: onSuccessLoginMsg, onSignUp: onSubmitResult });
 
   const SubheaderContent = () => (
     <>

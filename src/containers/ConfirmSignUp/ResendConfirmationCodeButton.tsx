@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { Auth } from 'aws-amplify';
+import { Auth } from '@aws-amplify/auth';
 import { PropTypes } from '@material-ui/core';
 import { FormActionsProps } from '../../components/Form/Form';
 import { useSnackbar } from '../../hooks/useSnackbar';

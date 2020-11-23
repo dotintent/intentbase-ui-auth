@@ -26,9 +26,10 @@ import { isObjectEmpty } from '../../utils/isObjectEmpty';
 import { CognitoError } from '../../common/interfaces/CognitoError';
 import { useSnackbar } from '../../hooks/useSnackbar';
 import { useSafeSetState } from '../../hooks/useSafeSetState';
+import { FormInput } from '../FormInput/FormInput';
 
 export interface FormProps {
-  onSubmit?: (values: any) => Promise<string>;
+  onSubmit?: (values: any) => Promise<string | undefined>;
   onSubmitResult?: (values: any) => Promise<void>;
   title?: string;
   titleAlign?: PropTypes.Alignment;
@@ -99,7 +100,7 @@ export const Form: FC<FormProps> = ({
       onSubmit(values)
         .then(async (message) => {
           setInternalLoading(false);
-          showSnackbar({ message, severity: 'success' });
+          message && showSnackbar({ message, severity: 'success' });
         })
         .catch(({ message }: CognitoError) => {
           setInternalLoading(false);
@@ -156,12 +157,20 @@ export const Form: FC<FormProps> = ({
               {Children.map(children, (child) => {
                 if (isValidElement(child)) {
                   const { props } = child;
+
+                  if (child.type !== FormInput) {
+                    return cloneElement(child, {
+                      loading: internalLoading,
+                    });
+                  }
+
                   if (props.required) {
                     setRequiredChildren((prevState) => {
                       prevState.push(props.id || props.source);
                       return prevState;
                     });
                   }
+
                   return cloneElement(
                     child,
                     {
@@ -171,6 +180,7 @@ export const Form: FC<FormProps> = ({
                     null,
                   );
                 }
+
                 return child;
               })}
             </FormInputsContainer>

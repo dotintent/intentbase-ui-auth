@@ -1,5 +1,6 @@
 export const hasValidLength = (value: string, length = 8): boolean => value.length >= length;
 
+// eslint-disable-next-line
 export const hasLetter = (value: string, quantity = 1): boolean =>
   new RegExp(`[a-zA-Z]{${quantity}}`).test(value);
 
@@ -31,6 +32,7 @@ export const isValidPassword = composeValidation(
   hasSpecialChar,
 );
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const isChildrenRequired = (values: any, requiredChildren: Array<string>) => {
   const errors: any = {};
   requiredChildren.forEach((field) => {
@@ -45,6 +47,7 @@ export const isChildrenRequired = (values: any, requiredChildren: Array<string>)
 export type DefaultAuthValidationOptions = Array<'email' | 'password' | 'code'>;
 
 export const defaultAuthValidation = (
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   values: any,
   requiredChildren: Array<string>,
   repeatPassword = false,

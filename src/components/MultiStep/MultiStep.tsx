@@ -119,7 +119,7 @@ const Page: FC<PageProps> = ({
   pageIndex,
   className,
 }) => {
-  const { currentPage, changePage } = useContext(WizardContext);
+  const { currentPage, changePage, totalPageNumber } = useContext(WizardContext);
 
   useEffect(() => {
     if (shouldMoveNext && currentPage === pageIndex) {
@@ -144,6 +144,7 @@ const Page: FC<PageProps> = ({
           className="page__button--continue"
           variant={continueButtonVariant}
           color={continueButtonColor}
+          disabled={currentPage === totalPageNumber - 1}
           onClick={() => changePage((prevPage) => prevPage + 1)}
         >
           {continueButtonLabel}
@@ -191,7 +192,7 @@ const Wizard: FC<WizardProps> = ({
       return newPageIndex;
     }
     if (totalPageNumber <= newPageIndex) {
-      return totalPageNumber;
+      return totalPageNumber - 1;
     }
     return 0;
   };

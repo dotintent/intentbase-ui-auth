@@ -19,7 +19,6 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strict": true,

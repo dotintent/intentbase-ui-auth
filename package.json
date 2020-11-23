@@ -20,34 +20,47 @@
     "email": "kubencki@gmail.com"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=12",
+    "yarn": ">=1.22"
   },
+  "contributors": [
+    "Bernard Kasprzak <bernard.kasprzak@withintent.com>",
+    "Tomasz Fabisiak <tomasz.fabisiak@withintent.com>"
+  ],
   "license": "UNLICENSED",
   "scripts": {
+    "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('Use yarn for installing')\"",
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll",
     "build": "yarn clean && tsc --project tsconfig.json",
     "build:watch": "yarn build -w",
+    "check": "yarn type-check && yarn format:check && yarn lint:check",
     "clean": "rimraf dist",
-    "type-check": "tsc",
+    "type-check": "tsc --noEmit",
     "format": "prettier --write --config .prettierrc .",
     "format:check": "prettier --check --config .prettierrc .",
-    "lint": "tsc --noEmit && eslint 'src/**/*.{js,ts,tsx}' --cache",
-    "lint:fix": "yarn lint --fix"
+    "lint": "yarn lint:check --fix",
+    "lint:check": "eslint 'src/**/*.{js,ts,tsx}' --cache"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
-    "aws-amplify": "^3.3.7",
+    "@aws-amplify/auth": "^3.4.12",
+    "@aws-amplify/core": "^3.8.4",
     "clsx": "^1.1.1",
     "final-form": "^4.20.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-final-form": "^6.5.2",
-    "styled-components": "^5.2.1"
+    "react-final-form": "^6.5.2"
+  },
+  "peerDependencies": {
+    "react": "17.x",
+    "react-dom": "17.x",
+    "styled-components": "5.2.1"
   },
   "devDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.1",
     "@babel/core": "^7.12.3",
     "@storybook/addon-actions": "^6.0.28",
     "@storybook/addon-controls": "^6.0.28",

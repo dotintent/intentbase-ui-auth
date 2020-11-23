@@ -6,6 +6,8 @@ import { defaultTheme } from '../theme';
 import { configureAmplify } from '../utils/configureAmplify';
 import { SnackbarContextProvider } from './SnackbarProvider';
 import { AuthContextProvider } from './auth/AuthProvider';
+import { ApiProvider } from './auth/ApiProvider';
+import { CognitoUser } from './auth/useCognitoUser';
 
 type Environment = 'production' | 'development' | 'test';
 
@@ -15,6 +17,7 @@ interface IntentbaseProps {
   userPoolId?: string;
   userPoolWebClientId?: string;
   environment?: Environment;
+  getApiUser?: (cognitoUser?: CognitoUser) => Promise<any>;
 }
 
 export const IntentbaseProvider: FC<IntentbaseProps> = ({
@@ -24,6 +27,7 @@ export const IntentbaseProvider: FC<IntentbaseProps> = ({
   userPoolWebClientId,
   theme = defaultTheme,
   environment = 'production',
+  getApiUser,
 }) => {
   if (!userPoolId || !userPoolWebClientId) {
     if (environment !== 'production') {
@@ -34,19 +38,17 @@ export const IntentbaseProvider: FC<IntentbaseProps> = ({
 
   configureAmplify(region, userPoolId, userPoolWebClientId);
 
-  const fetchUser = async () => {
-    return new Promise((resolve) => {
-      resolve('joe');
-    });
-  };
+  const defaultFetchUser = async (user?: any) => user;
 
   return (
     <StylesProvider injectFirst>
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
-          <AuthContextProvider getApiUser={fetchUser}>
-            <SnackbarContextProvider>{children}</SnackbarContextProvider>
-          </AuthContextProvider>
+          <ApiProvider>
+            <AuthContextProvider getApiUser={getApiUser || defaultFetchUser}>
+              <SnackbarContextProvider>{children}</SnackbarContextProvider>
+            </AuthContextProvider>
+          </ApiProvider>
         </ThemeProvider>
       </MuiThemeProvider>
     </StylesProvider>
