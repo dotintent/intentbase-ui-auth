@@ -14,7 +14,6 @@ export class AuthService {
 
   public constructor(options: AuthServiceOptions = defaultOptions) {
     const optionsBag = { ...defaultOptions, ...options };
-
     this.authGroups = <string[]>optionsBag.authGroups;
   }
 
@@ -77,7 +76,7 @@ export class AuthService {
       }
 
       if (e.errorType === 'Unauthorized') {
-        return Promise.reject();
+        return Promise.reject(e);
       }
     }
 
@@ -86,9 +85,8 @@ export class AuthService {
 
   public getPermissions = async (): Promise<string[]> => {
     const session = await Auth.currentSession();
-
     const groups = session.getAccessToken().decodePayload()['cognito:groups'];
 
-    return groups ? Promise.resolve(groups) : Promise.reject();
+    return groups ? Promise.resolve(groups) : Promise.reject(new Error('No permissions'));
   };
 }

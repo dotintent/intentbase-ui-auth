@@ -13,30 +13,30 @@ type Environment = 'production' | 'development' | 'test';
 
 interface IntentbaseProps {
   theme?: Partial<Theme> | ((outerTheme: Theme) => Theme);
-  region?: string;
-  userPoolId?: string;
-  userPoolWebClientId?: string;
+  awsCognitoRegion?: string;
+  awsCognitoUserPoolId?: string;
+  awsCognitoUserPoolWebClientId?: string;
   environment?: Environment;
   getApiUser?: (cognitoUser?: CognitoUser) => Promise<any>;
 }
 
 export const IntentbaseProvider: FC<IntentbaseProps> = ({
   children,
-  region = 'us-east-1',
-  userPoolId,
-  userPoolWebClientId,
+  awsCognitoRegion = 'us-east-1',
+  awsCognitoUserPoolId,
+  awsCognitoUserPoolWebClientId,
   theme = defaultTheme,
   environment = 'production',
   getApiUser,
 }) => {
-  if (!userPoolId || !userPoolWebClientId) {
+  if (!awsCognitoUserPoolId || !awsCognitoUserPoolWebClientId) {
     if (environment !== 'production') {
       return <h1>AWS Secrets required</h1>;
     }
     return null;
   }
 
-  configureAmplify(region, userPoolId, userPoolWebClientId);
+  configureAmplify(awsCognitoRegion, awsCognitoUserPoolId, awsCognitoUserPoolWebClientId);
 
   const defaultFetchUser = async (user?: any) => user;
 

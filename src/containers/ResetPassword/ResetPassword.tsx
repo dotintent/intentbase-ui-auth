@@ -44,11 +44,9 @@ export const ResetPassword: FC<ResetPasswordProps> = ({
   const [sentEmail, setSentEmail] = useState<string | undefined>(undefined);
 
   const onSendEmailResetPassword = useCallback(async ({ email }): Promise<string> => {
-    try {
-      await Auth.forgotPassword(email);
-      onSubmitResult && (await onSubmitResult({}));
-      setSentEmail(email);
-    } catch (ignore) {}
+    await Auth.forgotPassword(email);
+    onSubmitResult && (await onSubmitResult({}));
+    setSentEmail(email);
     return 'done';
   }, []);
 

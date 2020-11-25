@@ -11,7 +11,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({ children, ge
   const { user: cognitoUser, loading: cognitoUserLoading } = useCognitoUser();
   const [apiUser, setApiUser] = useState(undefined);
   const [apiUserLoading, setApiUserLoading] = useState(false);
-  const [error, setError] = useState(undefined);
+  const [userError, setUserError] = useState(undefined);
 
   const jwtAccessToken = cognitoUser?.idToken.jwtToken;
   const apiContext = useContext(ApiContext);
@@ -34,9 +34,9 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({ children, ge
 
     try {
       getApiUser(cognitoUser).then((result) => setApiUser(result));
-    } catch (e) {
-      setError(e);
-      console.error('Error: ', e);
+    } catch (error) {
+      setUserError(error);
+      console.error('Error: ', error);
     }
 
     setApiUserLoading(false);
@@ -46,7 +46,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({ children, ge
     return {
       loading: cognitoUserLoading || apiUserLoading || accessTokenWillBeSet,
       user: apiUser,
-      error,
+      userError,
     };
   }, [apiUser, apiUserLoading, cognitoUserLoading, accessTokenWillBeSet]);
 

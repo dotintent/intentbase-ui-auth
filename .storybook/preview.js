@@ -4,9 +4,9 @@ import { IntentbaseProvider } from '../src/providers/IntentbaseProvider';
 export const decorators = [
   (Story) => (
     <IntentbaseProvider
-      region={process.env.COGNITO_AWS_REGION}
-      userPoolId={process.env.COGNITO_USER_POOL_ID}
-      userPoolWebClientId={process.env.COGNITO_USER_POOL_CLIENT_ID}
+      awsCognitoRegion={process.env.AWS_COGNITO_REGION}
+      awsCognitoUserPoolId={process.env.AWS_COGNITO_USER_POOL_ID}
+      awsCognitoUserPoolWebClientId={process.env.AWS_COGNITO_USER_POOL_CLIENT_ID}
     >
       <Story />
     </IntentbaseProvider>
