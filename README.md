@@ -15,6 +15,8 @@
 
 ## About
 
+UI React components for Log in, Register and Forgot password, to use with auth providers like Cognito
+
 ## Getting started
 
 ### Prerequisites
