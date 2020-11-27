@@ -27,6 +27,9 @@ module.exports = {
       },
     ],
     'react/no-array-index-key': 0,
+    'import/no-extraneous-dependencies': 0,
+    'react/jsx-filename-extension': 0,
+    '@typescript-eslint/no-var-requires': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-implied-eval': 0,
     'react/prop-types': 0,
@@ -36,7 +39,6 @@ module.exports = {
     '@typescript-eslint/no-throw-literal': 0,
     'operator-linebreak': [2, 'after', { overrides: { '?': 'before', ':': 'before' } }],
     'import/extensions': [2, 'never', { json: 'always' }],
-    'import/no-extraneous-dependencies': [2, { devDependencies: true }], // (https://github.com/benmosher/eslint-plugin-import/issues/422#issuecomment-231076722)
     '@typescript-eslint/naming-convention': [
       'error',
       {

@@ -17,6 +17,10 @@
 # Optional eslint cache
 .eslintcache
 
+# Gatsby
+/.cache
+/docs/public
+
 # misc
 .DS_Store
 .env
