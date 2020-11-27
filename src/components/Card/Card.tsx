@@ -22,7 +22,7 @@ export interface CardProps extends MuiCardProps {
   fullWidth?: boolean;
 }
 
-export const Card: FC<CardProps> = ({ fullWidth = true, children, raised = true }) => {
+export const Card: FC<CardProps> = ({ fullWidth = false, children, raised = true }) => {
   return (
     <StyledCard fullWidth={fullWidth} raised={raised}>
       <CardContent>{children}</CardContent>

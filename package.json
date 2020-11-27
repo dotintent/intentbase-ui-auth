@@ -1,7 +1,7 @@
 {
-  "name": "intentbase-ui-auth",
+  "name": "@dotintent/intentbase-ui-auth",
   "description": "UI React components for Log in, Register and Forgot password, to use with auth providers like Cognito",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "private": false,
@@ -29,6 +29,7 @@
   ],
   "license": "UNLICENSED",
   "scripts": {
+    "prepublish": "yarn build",
     "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('Use yarn for installing')\"",
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll",
@@ -40,7 +41,8 @@
     "format": "prettier --write --config .prettierrc .",
     "format:check": "prettier --check --config .prettierrc .",
     "lint": "yarn lint:check --fix",
-    "lint:check": "eslint 'src/**/*.{js,ts,tsx}' --cache"
+    "lint:check": "eslint 'src/**/*.{js,ts,tsx}' --cache",
+    "publish": "npm run publish --access=public"
   },
   "dependencies": {
     "@aws-amplify/auth": "^3.4.12",

@@ -7,7 +7,7 @@
     "rootDir": "src",
     "sourceRoot": "/",
     "jsx": "react",
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "preserveConstEnums": true,
     "declaration": true,
