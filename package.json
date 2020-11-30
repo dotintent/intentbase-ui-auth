@@ -1,7 +1,7 @@
 {
   "name": "@dotintent/intentbase-ui-auth",
   "description": "UI React components for Log in, Register and Forgot password, to use with auth providers like Cognito",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "private": false,
@@ -41,8 +41,7 @@
     "format": "prettier --write --config .prettierrc .",
     "format:check": "prettier --check --config .prettierrc .",
     "lint": "yarn lint:check --fix",
-    "lint:check": "eslint 'src/**/*.{js,ts,tsx}' --cache",
-    "publish": "npm run publish --access=public"
+    "lint:check": "eslint 'src/**/*.{js,ts,tsx}' --cache"
   },
   "dependencies": {
     "@aws-amplify/auth": "^3.4.12",

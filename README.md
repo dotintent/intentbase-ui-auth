@@ -63,6 +63,12 @@ To run script, in terminal type `yarn {script}`.
 | `lint`         | Fix linter                              |                                            |
 | `lint:check`   | Checks linter rules                     |                                            |
 
+## Publishing
+
+```shell script
+npm publish --access=public
+```
+
 ## Useful docs
 
 - [Create React App](https://github.com/facebook/create-react-app)
