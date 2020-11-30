@@ -5,17 +5,20 @@ const navConfig = {
     description: 'Backend starter for intentbase projects',
   },
   'UI Auth': {
-    category: 'Frontend',
+    category: 'Components',
     url: 'https://github.com/dotintent/intentbase-ui-auth',
     description:
       'UI React components for Log in, Register and Forgot password, to use with auth providers like Cognito.',
-    omitLandingPage: true,
   },
   'Frontend Starter': {
     category: 'Frontend',
     url: 'https://github.com/dotintent/intentbase-front',
     description: 'Frontend starter for intentbase projects',
-    omitLandingPage: true,
+  },
+  'Deployment script': {
+    category: 'DevOps',
+    url: 'https://github.com/dotintent/intentbase-front',
+    description: 'Frontend starter for intentbase projects',
   },
 };
 

@@ -1,7 +1,21 @@
 {
   "name": "@dotintent/intentbase-ui-auth-docs",
-  "version": "0.1.0",
   "description": "Intentbase UI Auth Documentation",
+  "version": "0.1.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dotintent/intentbase-ui-auth",
+    "directory": "docs"
+  },
+  "author": {
+    "name": "Jakub Jóźwiak",
+    "email": "kubencki@gmail.com"
+  },
+  "contributors": [
+    "Bernard Kasprzak <bernard.kasprzak@withintent.com>",
+    "Tomasz Fabisiak <tomasz.fabisiak@withintent.com>"
+  ],
   "keywords": [
     "intent",
     "intentbase",
@@ -10,6 +24,10 @@
     "gatsby",
     "docs"
   ],
+  "engines": {
+    "node": ">=12",
+    "yarn": ">=1.22"
+  },
   "license": "MIT",
   "scripts": {
     "clean": "gatsby clean",
