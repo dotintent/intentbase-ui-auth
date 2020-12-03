@@ -160,7 +160,7 @@ export const Form: FC<FormProps> = ({
 
                   if (child.type !== FormInput) {
                     return cloneElement(child, {
-                      loading: internalLoading,
+                      disabled: internalLoading,
                     });
                   }
 
@@ -174,7 +174,7 @@ export const Form: FC<FormProps> = ({
                   return cloneElement(
                     child,
                     {
-                      loading: internalLoading,
+                      disabled: internalLoading,
                       variant: inputVariant,
                     },
                     null,
@@ -187,7 +187,7 @@ export const Form: FC<FormProps> = ({
             <FormActionsContainer className="form__container__actions">
               {formActionsBeforeConfirm &&
                 cloneElement(formActionsBeforeConfirm, {
-                  loading: internalLoading,
+                  disabled: internalLoading,
                   values,
                 })}
               <FormButton
