@@ -10,6 +10,7 @@
   - [Installation](#-installation)
   - [Prepare and fill secrets](#-prepare-and-fill-secrets)
   - [Running the app](#-running-the-app)
+- [Conventional Commits](#-conventional-commits)
 - [Available scripts](#-available-scripts)
 - [Useful docs](#-useful-docs)
 
@@ -43,6 +44,19 @@ Copy and paste .env.example into .env and fill all secrets.
 ```shell script
 yarn storybook
 ```
+
+## Conventional Commits
+
+Commitlint checks if your commit messages meet the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) format.
+
+Example:
+
+```git
+feat(blog): add comment section
+```
+
+Common types according to commitlint-config-conventional (based on the the Angular convention) can be:
+[conventional-commit-types](https://github.com/commitizen/conventional-commit-types/blob/master/index.json)
 
 ## Available scripts
 
