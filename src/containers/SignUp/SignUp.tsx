@@ -12,6 +12,7 @@ export interface SignUpProps extends FormWithDefaultsProps {
   subheaderHaveAnAccount?: string;
   subheaderSignIn?: string;
   subheaderSignInBtnColor?: TypographyColor;
+  passwordRepeat?: boolean;
 }
 
 export const SignUp: FC<SignUpProps> = ({
@@ -27,6 +28,7 @@ export const SignUp: FC<SignUpProps> = ({
   passwordLabel = 'Password',
   autoFocus = false,
   passwordPreview = true,
+  passwordRepeat = false,
   children,
   className,
   subheaderSignInBtnColor = 'primary',
@@ -70,6 +72,7 @@ export const SignUp: FC<SignUpProps> = ({
         source="password"
         passwordPreview={passwordPreview}
         label={passwordLabel}
+        repeat={passwordRepeat}
         required
       />
       {children}
