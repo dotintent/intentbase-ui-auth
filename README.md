@@ -55,7 +55,7 @@ Example:
 feat(blog): add comment section
 ```
 
-Common types according to commitlint-config-conventional (based on the the Angular convention) can be:
+Common types according to commitlint-config-conventional (based on the Angular convention) can be:
 [conventional-commit-types](https://github.com/commitizen/conventional-commit-types/blob/master/index.json)
 
 ## Available scripts
