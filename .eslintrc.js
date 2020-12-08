@@ -26,6 +26,8 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
+    'react/jsx-filename-extension': 0,
+    'import/no-unresolved': 0,
     'react/no-array-index-key': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-implied-eval': 0,
