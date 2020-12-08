@@ -35,9 +35,14 @@ yarn install
 
 Copy and paste .env.example into .env and fill all secrets.
 
-| Secret   | Description               | Default |
-| -------- | ------------------------- | ------- |
-| NODE_ENV | Define current enviroment | -       |
+> _Important Note:_ AWS secrets must be filled before starting storybook.
+
+| Secret                          | Description                | Default   |
+| ------------------------------- | -------------------------- | --------- |
+| NODE_ENV                        | Define current environment | -         |
+| AWS_COGNITO_REGION              |                            | eu-west-1 |
+| AWS_COGNITO_USER_POOL_ID        |                            | -         |
+| AWS_COGNITO_USER_POOL_CLIENT_ID |                            | -         |
 
 ### Running the app
 
@@ -64,8 +69,8 @@ To run script, in terminal type `yarn {script}`.
 
 | Script         | Description                             | Note                                       |
 | -------------- | --------------------------------------- | ------------------------------------------ |
+| `prepublish`   | Builds components                       | It runs automatically before every publish |
 | `preinstall`   | Checks is yarn was used package manager | It runs automatically before every install |
-| `prebuild`     | Runs yarn clean                         | It runs automatically before every build   |
 | `start`        | Starts app locally                      |                                            |
 | `clean`        | Removes build directory if it exists    |                                            |
 | `build`        | Builds app                              |                                            |
@@ -86,4 +91,7 @@ npm publish --access=public
 ## Useful docs
 
 - [Create React App](https://github.com/facebook/create-react-app)
-- [React Admin](https://marmelab.com/react-admin/Readme.html)
+- [AWS Amplify Auth](https://docs.amplify.aws/lib/auth/getting-started/q/platform/js)
+- [Styled-components](https://styled-components.com/docs)
+- [Storybook](https://storybook.js.org/docs/react/get-started/introduction)
+- [Docusaurus](https://v2.docusaurus.io/docs/)
