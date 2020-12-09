@@ -44,7 +44,7 @@ function Feature({ imageUrl, title, description }) {
   );
 }
 
-function Home() {
+const Home = () => {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
   return (
@@ -59,7 +59,7 @@ function Home() {
                 'button button--outline button--secondary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('docs/')}
+              to={useBaseUrl('/')}
             >
               Get Started
             </Link>
@@ -81,6 +81,6 @@ function Home() {
       </main>
     </Layout>
   );
-}
+};
 
 export default Home;

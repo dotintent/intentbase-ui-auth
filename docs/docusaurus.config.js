@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Intentbase Docs',
   tagline: 'Set of packages for intentbase project.',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://intentbase.netlify.app',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -32,12 +32,12 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'docs/frontend',
+          to: '/',
           label: 'Frontend Starter',
           position: 'left',
         },
         {
-          to: 'docs/backend',
+          to: '/',
           label: 'Backend Starter',
           position: 'left',
         },
@@ -60,11 +60,11 @@ module.exports = {
             },
             {
               label: 'Frontend Starter',
-              to: 'docs/frontend',
+              to: '/',
             },
             {
               label: 'Backend Starter',
-              to: 'docs/backend',
+              to: '/',
             },
           ],
         },
@@ -117,7 +117,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/dotintent/intentbase-ui-auth/docs',
+          editUrl: 'https://github.com/dotintent/intentbase-ui-auth/tree/main/docs',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
