@@ -36,7 +36,13 @@ export const IntentbaseProvider: FC<IntentbaseProps> = ({
     return null;
   }
 
-  configureAmplify(awsCognitoRegion, awsCognitoUserPoolId, awsCognitoUserPoolWebClientId);
+  try {
+    configureAmplify(awsCognitoRegion, awsCognitoUserPoolId, awsCognitoUserPoolWebClientId);
+  } catch (error) {
+    if (environment !== 'production') {
+      console.error('AWS Secrets required');
+    }
+  }
 
   const defaultFetchUser = async (user?: any) => user;
 
