@@ -14,8 +14,8 @@ type Environment = 'production' | 'development' | 'test';
 interface IntentbaseProps {
   theme?: Partial<Theme> | ((outerTheme: Theme) => Theme);
   awsCognitoRegion?: string;
-  awsCognitoUserPoolId?: string;
-  awsCognitoUserPoolWebClientId?: string;
+  awsCognitoUserPoolId: string;
+  awsCognitoUserPoolWebClientId: string;
   environment?: Environment;
   getApiUser?: (cognitoUser?: CognitoUser) => Promise<any>;
 }
@@ -29,13 +29,6 @@ export const IntentbaseProvider: FC<IntentbaseProps> = ({
   environment = 'production',
   getApiUser,
 }) => {
-  if (!awsCognitoUserPoolId || !awsCognitoUserPoolWebClientId) {
-    if (environment !== 'production') {
-      return <h1>AWS Secrets required</h1>;
-    }
-    return null;
-  }
-
   try {
     configureAmplify(awsCognitoRegion, awsCognitoUserPoolId, awsCognitoUserPoolWebClientId);
   } catch (error) {
