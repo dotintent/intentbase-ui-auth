@@ -15,7 +15,7 @@
 
 <hr>
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![CI](https://github.com/dotintent/intentbase-ui-auth/workflows/Continuous%20Integration/badge.svg)](https://github.com/dotintent/intentbase-ui-auth/actions?query=workflow%3A%22Continuous+Integration%22)
 [![NPM Bundle Size](https://img.shields.io/bundlephobia/minzip/@dotintent/intentbase-ui-auth)](https://www.npmjs.com/package/@dotintent/intentbase-ui-auth)
 [![NPM Downloads](https://img.shields.io/npm/dm/@dotintent/intentbase-ui-auth)](https://www.npmjs.com/package/@dotintent/intentbase-ui-auth)
