@@ -1,15 +1,19 @@
 <h1 align="center">Intentbase UI Auth</h1>
 
 <p align="center">
-  <img src="./docs/static/img/mobile-logo.png" alt="intent-logo" width="120px" height="120px"/>
+  <a href="https://withintent.com">
+    <img src="./docs/static/img/mobile-logo.png" alt="intent-logo" width="120px" height="120px"/>
+  </a>
   <br>
   <i>UI React components for Log in, Register and Forgot password,
     <br> to use with auth providers like Cognito.</i>
   <br>
+  <br>
+  <i>Created by <a href="https://withintent.com/">Intent</a></i>
 </p>
 
 <p align="center">
-  <a href="https://intentbase-ui-auth.netlify.app/"><strong>intentbase-ui-auth.netlify.app</strong></a>
+  <a href="https://intentbase-ui-auth.netlify.app"><strong>intentbase-ui-auth.netlify.app</strong></a>
   <br>
 </p>
 
