@@ -1,6 +1,29 @@
-# Intentbase UI Auth
+<h1 align="center">Intentbase UI Auth</h1>
 
-![CI](https://github.com/dotintent/intentbase-ui-auth/workflows/Continuous%20Integration/badge.svg)
+<p align="center">
+  <a href="https://withintent.com">
+    <img src="./docs/static/img/mobile-logo.png" alt="intent-logo" width="120px" height="120px"/>
+  </a>
+  <br>
+  <i>UI React components for Log in, Register and Forgot password,
+    <br> to use with auth providers like Cognito.</i>
+  <br>
+  <br>
+  <i>Created by <a href="https://withintent.com/">Intent</a></i>
+</p>
+
+<p align="center">
+  <a href="https://intentbase-ui-auth.netlify.app"><strong>intentbase-ui-auth.netlify.app</strong></a>
+  <br>
+</p>
+
+<hr>
+
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![CI](https://github.com/dotintent/intentbase-ui-auth/workflows/Continuous%20Integration/badge.svg)](https://github.com/dotintent/intentbase-ui-auth/actions?query=workflow%3A%22Continuous+Integration%22)
+[![NPM Bundle Size](https://img.shields.io/bundlephobia/minzip/@dotintent/intentbase-ui-auth)](https://www.npmjs.com/package/@dotintent/intentbase-ui-auth)
+[![NPM Downloads](https://img.shields.io/npm/dm/@dotintent/intentbase-ui-auth)](https://www.npmjs.com/package/@dotintent/intentbase-ui-auth)
+[![NPM Version](https://img.shields.io/npm/v/@dotintent/intentbase-ui-auth)](https://www.npmjs.com/package/@dotintent/intentbase-ui-auth)
 
 ## Table of Contents
 
