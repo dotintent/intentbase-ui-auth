@@ -98,5 +98,6 @@ npm publish --access=public
 - [Docusaurus](https://v2.docusaurus.io/docs/)
 
 ## License
+
 Copyright 2020 Intent.
 Licensed under the [MIT license](LICENSE).
