@@ -1,6 +1,10 @@
 # Intentbase UI Auth
 
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 ![CI](https://github.com/dotintent/intentbase-ui-auth/workflows/Continuous%20Integration/badge.svg)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/@dotintent/intentbase-ui-auth)
+![npm](https://img.shields.io/npm/dm/@dotintent/intentbase-ui-auth)
+![npm](https://img.shields.io/npm/v/@dotintent/intentbase-ui-auth)
 
 ## Table of Contents
 
