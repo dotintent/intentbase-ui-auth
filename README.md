@@ -32,6 +32,7 @@
 - [Conventional Commits](#-conventional-commits)
 - [Available scripts](#-available-scripts)
 - [Useful docs](#-useful-docs)
+- [License](#-license)
 
 ## About
 
@@ -114,3 +115,8 @@ npm publish --access=public
 - [Styled-components](https://styled-components.com/docs)
 - [Storybook](https://storybook.js.org/docs/react/get-started/introduction)
 - [Docusaurus](https://v2.docusaurus.io/docs/)
+
+## License
+
+Copyright 2020 Intent.
+Licensed under the [MIT license](LICENSE).
