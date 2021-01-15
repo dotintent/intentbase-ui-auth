@@ -80,8 +80,6 @@ export function useCognitoUser(): {
         }
       } catch (error) {
         if (isMountedRef.current) {
-          // eslint-disable-next-line no-console
-          console.error('Auth.currentAuthenticatedUser raised an error:', error);
           setState({ user: undefined, loading: false });
         }
       }
