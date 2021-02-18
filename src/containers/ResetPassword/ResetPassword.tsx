@@ -7,6 +7,8 @@ import { FormInput } from '../../components/FormInput/FormInput';
 import { Form, FormWithDefaultsProps } from '../../components/Form/Form';
 import * as MultiStep from '../../components/MultiStep/MultiStep';
 import { ProgressBarPosition } from '../../components/MultiStep/MultiStep.styled';
+import { useRequestResetCode } from '../../hooks/useRequestResetCode';
+import { useSetNewPassword } from '../../hooks/useSetNewPassword';
 
 interface ResetPasswordProps extends FormWithDefaultsProps {
   progressBarPosition?: ProgressBarPosition;
@@ -42,10 +44,10 @@ export const ResetPassword: FC<ResetPasswordProps> = ({
   ...rest
 }) => {
   const [sentEmail, setSentEmail] = useState<string | undefined>(undefined);
-
+  const sendEmailReset = useRequestResetCode({ onSuccess: onSubmitResult });
+  const setNewPassword = useSetNewPassword({ onSuccess: onSubmitResult });
   const onSendEmailResetPassword = useCallback(async ({ email }): Promise<string> => {
-    await Auth.forgotPassword(email);
-    onSubmitResult && (await onSubmitResult({}));
+    await sendEmailReset(email);
     setSentEmail(email);
     return 'done';
   }, []);
@@ -54,8 +56,7 @@ export const ResetPassword: FC<ResetPasswordProps> = ({
     if (!sentEmail) {
       return 'err';
     }
-    Auth.forgotPasswordSubmit(sentEmail, code, password);
-    onSubmitResult && (await onSubmitResult({}));
+    await setNewPassword({ username: sentEmail, code, password });
     return 'done';
   }, []);
 

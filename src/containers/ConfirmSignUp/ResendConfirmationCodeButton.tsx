@@ -1,9 +1,8 @@
 import React, { FC, useCallback, useState } from 'react';
-import { Auth } from '@aws-amplify/auth';
 import { PropTypes } from '@material-ui/core';
 import { FormActionsProps } from '../../components/Form/Form';
 import { useSnackbar } from '../../hooks/useSnackbar';
-import { CognitoError } from '../../common/interfaces/CognitoError';
+import { useRequestConfirmationCode } from '../../hooks/useRequestConfirmationCode';
 import { FormButton } from '../../components/FormButton/FormButton';
 import { StyledFormActionsContainer } from './ResendConfirmationCodeButton.styled';
 
@@ -26,22 +25,23 @@ export const ResendConfirmationCodeButton: FC<ResendConfirmationCodeProps> = ({
 }) => {
   const [internalLoading, setInternalLoading] = useState(false);
   const showSnackbar = useSnackbar();
+  const resendCode = useRequestConfirmationCode();
 
-  const resendCode = useCallback(async () => {
+  const requestCode = useCallback(async () => {
     setInternalLoading(true);
     const { email } = values;
-    const formattedEmail = email.trim().toLowerCase();
 
-    await Auth.resendSignUp(formattedEmail)
-      .then(() => {
-        showSnackbar({ message: onSuccessResendMsg, severity: 'success' });
-      })
-      .catch(({ message }: CognitoError) => {
-        showSnackbar({ message, severity: 'error' });
-      })
-      .finally(() => {
-        setInternalLoading(false);
+    try {
+      await resendCode(email);
+      showSnackbar({ message: onSuccessResendMsg, severity: 'success' });
+    } catch (error) {
+      showSnackbar({
+        message: error?.message || 'Oops, Something went wrong',
+        severity: 'error',
       });
+    }
+
+    setInternalLoading(false);
   }, [values.email]);
 
   return (
@@ -50,7 +50,7 @@ export const ResendConfirmationCodeButton: FC<ResendConfirmationCodeProps> = ({
         color={resendButtonColor}
         disabled={loading || internalLoading}
         fullWidth={fullWidth}
-        onClick={resendCode}
+        onClick={requestCode}
       >
         {resendCodeLabel}
       </FormButton>

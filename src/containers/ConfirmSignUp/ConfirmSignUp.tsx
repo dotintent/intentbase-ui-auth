@@ -1,8 +1,8 @@
 import React, { FC, useCallback } from 'react';
-import { Auth } from '@aws-amplify/auth';
 import clsx from 'clsx';
 import { FormInput } from '../../components/FormInput/FormInput';
 import { Form, FormWithDefaultsProps } from '../../components/Form/Form';
+import { useConfirmSignupCode } from '../../hooks/useConfirmSignupCode';
 import {
   ResendConfirmationCodeButton,
   ResendConfirmationCodeBaseProps,
@@ -27,14 +27,13 @@ export const ConfirmSignUp: FC<ConfirmSignUpProps> = ({
   resendButtonColor = 'default',
   ...rest
 }) => {
+  const confirmCode = useConfirmSignupCode({
+    onSuccess: onSubmitResult,
+    successMsg: onSuccessLoginMsg,
+  });
   const confirmSignUp = useCallback(async (values: any) => {
     const { email, code } = values;
-    const formattedEmail = email.trim().toLowerCase();
-
-    return Auth.confirmSignUp(formattedEmail, code).then(async (result: any) => {
-      onSubmitResult && (await onSubmitResult(result));
-      return onSuccessLoginMsg;
-    });
+    return confirmCode({ username: email, code });
   }, []);
 
   const formActionsBeforeConfirm = (

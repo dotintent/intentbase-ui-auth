@@ -25,7 +25,7 @@ export const SignIn: FC<SignInProps> = ({
   className,
   ...rest
 }) => {
-  const signIn = useLogin({ onLogin: onSubmitResult, onSuccessLoginMsg });
+  const signIn = useLogin({ onSuccess: onSubmitResult, successMsg: onSuccessLoginMsg });
 
   return (
     <>
