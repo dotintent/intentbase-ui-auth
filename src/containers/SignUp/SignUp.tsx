@@ -34,7 +34,7 @@ export const SignUp: FC<SignUpProps> = ({
   subheaderSignInBtnColor = 'primary',
   ...rest
 }) => {
-  const signUp = useSignUp({ onSuccessSignUpMsg: onSuccessLoginMsg, onSignUp: onSubmitResult });
+  const signUp = useSignUp({ onSuccess: onSubmitResult, successMsg: onSuccessLoginMsg });
 
   const SubheaderContent = () => (
     <>

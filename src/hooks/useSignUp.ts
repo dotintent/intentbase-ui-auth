@@ -6,8 +6,8 @@ export interface OnSignUpProps<T> extends ISignUpResult {
 }
 
 export interface UseSignUpProps {
-  onSignUp?: (values: OnSignUpProps<any>) => Promise<void>;
-  onSuccessSignUpMsg: string;
+  onSuccess?: (values: OnSignUpProps<any>) => Promise<void>;
+  successMsg?: string;
 }
 export interface SignUpRequires {
   email: string;
@@ -18,7 +18,7 @@ export interface SignUpRequires {
 // 1.) signUp({ email, password });
 // 2.) signUp<ValuesInterface>({ email, password, age });
 
-export const useSignUp = ({ onSignUp, onSuccessSignUpMsg }: UseSignUpProps) => {
+export const useSignUp = ({ onSuccess, successMsg }: UseSignUpProps = {}) => {
   return async <T extends SignUpRequires>(props: any): Promise<string | undefined> => {
     const { email, password } = props;
     const formattedEmail = email.trim().toLowerCase();
@@ -37,8 +37,8 @@ export const useSignUp = ({ onSignUp, onSuccessSignUpMsg }: UseSignUpProps) => {
         formValues = rest;
       }
       const packedUser = { ...result, formValues };
-      onSignUp && (await onSignUp(packedUser));
-      return onSuccessSignUpMsg;
+      onSuccess && (await onSuccess(packedUser));
+      return successMsg;
     });
   };
 };

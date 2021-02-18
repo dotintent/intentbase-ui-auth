@@ -88,7 +88,6 @@ export const Form: FC<FormProps> = ({
   const [internalLoading, setInternalLoading] = useSafeSetState<boolean>(loading);
   const [requiredChildren, setRequiredChildren] = useState<Array<string>>([]);
   const showSnackbar = useSnackbar();
-
   useEffect(() => {
     setInternalLoading(loading);
   }, [loading]);
