@@ -1,6 +1,4 @@
 import React, { FC, useCallback, useState } from 'react';
-import { Auth } from '@aws-amplify/auth';
-
 import clsx from 'clsx';
 import { Variant } from '@material-ui/core/styles/createTypography';
 import { FormInput } from '../../components/FormInput/FormInput';
