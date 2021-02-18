@@ -14,6 +14,7 @@ export { useSnackbar } from './hooks/useSnackbar';
 export { useRequestConfirmationCode } from './hooks/useRequestConfirmationCode';
 export { useConfirmSignupCode } from './hooks/useConfirmSignupCode';
 export { useRequestResetCode } from './hooks/useRequestResetCode';
+export { useSetNewPassword } from './hooks/useSetNewPassword';
 export { PageLoading } from './components/PageLoading/PageLoading';
 export { Card } from './components/Card/Card';
 export { Form } from './components/Form/Form';

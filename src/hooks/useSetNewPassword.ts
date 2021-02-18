@@ -1,6 +1,6 @@
 import { Auth } from '@aws-amplify/auth';
 
-export interface SseSetNewPasswordProps {
+export interface SeSetNewPasswordProps {
   onSuccess?: (values: any) => Promise<void>;
   successMsg?: string;
 }
@@ -11,7 +11,7 @@ interface NewPasswordProps {
   password: string;
 }
 
-export const useSetNewPassword = ({ onSuccess, successMsg }: SseSetNewPasswordProps = {}): ((
+export const useSetNewPassword = ({ onSuccess, successMsg }: SeSetNewPasswordProps = {}): ((
   values: NewPasswordProps,
 ) => Promise<string | undefined>) => async ({ username, code, password }) => {
   return Auth.forgotPasswordSubmit(username.trim().toLowerCase(), code, password).then(
