@@ -88,14 +88,12 @@ export const Form: FC<FormProps> = ({
   const [internalLoading, setInternalLoading] = useSafeSetState<boolean>(loading);
   const [requiredChildren, setRequiredChildren] = useState<Array<string>>([]);
   const showSnackbar = useSnackbar();
-  console.log(onSubmit);
   useEffect(() => {
     setInternalLoading(loading);
   }, [loading]);
 
   const handleOnSubmit = useCallback((values) => {
     setInternalLoading(true);
-    console.log(onSubmit);
     return (
       onSubmit &&
       onSubmit(values)
