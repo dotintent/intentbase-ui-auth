@@ -1,7 +1,7 @@
 import { Auth } from '@aws-amplify/auth';
 
 export interface UseConfirmSignupCodeProps {
-  onSuccess?: (values: any) => Promise<void>;
+  onSuccess?: (...values: any[]) => Promise<void>;
   successMsg?: string;
 }
 
