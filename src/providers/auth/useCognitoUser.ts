@@ -71,14 +71,17 @@ export function useCognitoUser(): {
     isMountedRef.current = true;
 
     const updateUser = async () => {
+      console.log('Update User Event');
       try {
         const cognitoUser = await Auth.currentAuthenticatedUser({
           bypassCache: false,
         });
+        console.log('Cognito user:', cognitoUser);
         if (isMountedRef.current) {
           setState({ user: mapCognitoUser(cognitoUser), loading: false });
         }
       } catch (error) {
+        console.warn('Error', error);
         if (isMountedRef.current) {
           setState({ user: undefined, loading: false });
         }

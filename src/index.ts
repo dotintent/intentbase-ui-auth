@@ -15,6 +15,8 @@ export { useRequestConfirmationCode } from './hooks/useRequestConfirmationCode';
 export { useConfirmSignupCode } from './hooks/useConfirmSignupCode';
 export { useRequestResetCode } from './hooks/useRequestResetCode';
 export { useSetNewPassword } from './hooks/useSetNewPassword';
+export { useFacebookSignIn } from './hooks/useFacebookSignIn';
+export { useGoogleSignIn } from './hooks/useGoogleSignIn';
 export { getToken } from './providers/auth/getToken';
 export { PageLoading } from './components/PageLoading/PageLoading';
 export { Card } from './components/Card/Card';
