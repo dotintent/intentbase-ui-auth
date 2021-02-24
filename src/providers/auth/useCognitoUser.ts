@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Hub } from '@aws-amplify/core';
 
 export interface CognitoUser {
-  email: string;
+  username: string;
   emailVerified: boolean;
   accessToken: {
     jwtToken: string;
@@ -31,16 +31,16 @@ export interface CognitoUser {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mapCognitoUser(user: any): CognitoUser | undefined {
+const mapCognitoUser = (user: any): CognitoUser | undefined => {
   if (
-    user?.attributes?.email &&
+    (user?.attributes?.email || user?.username) &&
     user?.signInUserSession?.accessToken?.jwtToken &&
     user?.signInUserSession?.idToken?.jwtToken &&
     user?.signInUserSession?.refreshToken?.token
   ) {
     return {
-      email: user.attributes.email,
-      emailVerified: user.attributes.email_verified === 'True',
+      username: user?.attributes?.email || user.username,
+      emailVerified: user?.attributes?.email_verified === 'True',
       accessToken: user.signInUserSession.accessToken,
       idToken: user.signInUserSession.idToken,
       refreshToken: user.signInUserSession.refreshToken,
@@ -56,12 +56,12 @@ function mapCognitoUser(user: any): CognitoUser | undefined {
   }
 
   return undefined;
-}
+};
 
-export function useCognitoUser(): {
+export const useCognitoUser = (): {
   user?: CognitoUser;
   loading: boolean;
-} {
+} => {
   const [state, setState] = useState<{ user?: CognitoUser; loading: boolean }>({
     loading: true,
   });
@@ -71,17 +71,14 @@ export function useCognitoUser(): {
     isMountedRef.current = true;
 
     const updateUser = async () => {
-      console.log('Update User Event');
       try {
         const cognitoUser = await Auth.currentAuthenticatedUser({
           bypassCache: false,
         });
-        console.log('Cognito user:', cognitoUser);
         if (isMountedRef.current) {
           setState({ user: mapCognitoUser(cognitoUser), loading: false });
         }
       } catch (error) {
-        console.warn('Error', error);
         if (isMountedRef.current) {
           setState({ user: undefined, loading: false });
         }
@@ -89,17 +86,25 @@ export function useCognitoUser(): {
     };
 
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    Hub.listen('auth', updateUser);
+    Hub.listen('auth', ({ payload: { event } }) => {
+      switch (event) {
+        case 'signIn':
+        case 'cognitoHostedUI':
+          updateUser();
+          break;
+        default:
+          break;
+      }
+    });
 
     updateUser();
 
     return () => {
       isMountedRef.current = false;
-
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       Hub.remove('auth', updateUser);
     };
   }, [isMountedRef]);
 
   return state;
-}
+};

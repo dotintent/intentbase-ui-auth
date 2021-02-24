@@ -5,16 +5,14 @@ export const configureAmplify = (
   region: string,
   userPoolId: string,
   userPoolWebClientId: string,
-  oauth: OAuthOpts,
+  oauth?: OAuthOpts,
 ): void => {
   Amplify.configure({
     Auth: {
       region,
       userPoolId,
       userPoolWebClientId,
-      oauth: {
-        ...oauth,
-      },
+      ...(oauth && { oauth }),
     },
   });
 };

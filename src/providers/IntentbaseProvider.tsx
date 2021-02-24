@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { useRef, FC } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { MuiThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
@@ -17,7 +17,7 @@ interface IntentbaseProps {
   awsCognitoRegion?: string;
   awsCognitoUserPoolId: string;
   awsCognitoUserPoolWebClientId: string;
-  awsCognitoOAuth: OAuthOpts;
+  awsCognitoOAuth?: OAuthOpts;
   environment?: Environment;
   getApiUser?: (cognitoUser?: CognitoUser) => Promise<any>;
 }
@@ -32,14 +32,17 @@ export const IntentbaseProvider: FC<IntentbaseProps> = ({
   environment = 'production',
   getApiUser,
 }) => {
+  const isAmplifyConfiguredRef = useRef(false);
   try {
-    console.log('Amplify Setup');
-    configureAmplify(
-      awsCognitoRegion,
-      awsCognitoUserPoolId,
-      awsCognitoUserPoolWebClientId,
-      awsCognitoOAuth,
-    );
+    if (!isAmplifyConfiguredRef.current) {
+      isAmplifyConfiguredRef.current = true;
+      configureAmplify(
+        awsCognitoRegion,
+        awsCognitoUserPoolId,
+        awsCognitoUserPoolWebClientId,
+        awsCognitoOAuth,
+      );
+    }
   } catch (error) {
     if (environment !== 'production') {
       console.error('AWS Secrets required');
