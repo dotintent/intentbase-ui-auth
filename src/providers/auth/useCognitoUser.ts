@@ -48,8 +48,7 @@ const mapCognitoUser = (user: any): CognitoUser | undefined => {
   }
 
   if (user) {
-    // eslint-disable-next-line no-console
-    console.log(
+    console.warn(
       'aws-amplify returned a CognitoUser. However, it has been skipped, because it lacks required attributes',
       user,
     );
@@ -85,7 +84,6 @@ export const useCognitoUser = (): {
       }
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     Hub.listen('auth', ({ payload: { event } }) => {
       switch (event) {
         case 'signIn':
@@ -101,8 +99,16 @@ export const useCognitoUser = (): {
 
     return () => {
       isMountedRef.current = false;
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      Hub.remove('auth', updateUser);
+      Hub.remove('auth', ({ payload: { event } }) => {
+        switch (event) {
+          case 'signIn':
+          case 'cognitoHostedUI':
+            updateUser();
+            break;
+          default:
+            break;
+        }
+      });
     };
   }, [isMountedRef]);
 
