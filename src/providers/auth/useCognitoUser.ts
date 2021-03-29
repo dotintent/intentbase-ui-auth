@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Hub } from '@aws-amplify/core';
 
 export interface CognitoUser {
-  email: string;
+  username: string;
   emailVerified: boolean;
   accessToken: {
     jwtToken: string;
@@ -31,16 +31,16 @@ export interface CognitoUser {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mapCognitoUser(user: any): CognitoUser | undefined {
+const mapCognitoUser = (user: any): CognitoUser | undefined => {
   if (
-    user?.attributes?.email &&
+    (user?.attributes?.email || user?.username) &&
     user?.signInUserSession?.accessToken?.jwtToken &&
     user?.signInUserSession?.idToken?.jwtToken &&
     user?.signInUserSession?.refreshToken?.token
   ) {
     return {
-      email: user.attributes.email,
-      emailVerified: user.attributes.email_verified === 'True',
+      username: user?.attributes?.email || user.username,
+      emailVerified: user?.attributes?.email_verified === 'True',
       accessToken: user.signInUserSession.accessToken,
       idToken: user.signInUserSession.idToken,
       refreshToken: user.signInUserSession.refreshToken,
@@ -48,20 +48,19 @@ function mapCognitoUser(user: any): CognitoUser | undefined {
   }
 
   if (user) {
-    // eslint-disable-next-line no-console
-    console.log(
+    console.warn(
       'aws-amplify returned a CognitoUser. However, it has been skipped, because it lacks required attributes',
       user,
     );
   }
 
   return undefined;
-}
+};
 
-export function useCognitoUser(): {
+export const useCognitoUser = (): {
   user?: CognitoUser;
   loading: boolean;
-} {
+} => {
   const [state, setState] = useState<{ user?: CognitoUser; loading: boolean }>({
     loading: true,
   });
@@ -85,18 +84,33 @@ export function useCognitoUser(): {
       }
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    Hub.listen('auth', updateUser);
+    Hub.listen('auth', ({ payload: { event } }) => {
+      switch (event) {
+        case 'signIn':
+        case 'cognitoHostedUI':
+          updateUser();
+          break;
+        default:
+          break;
+      }
+    });
 
     updateUser();
 
     return () => {
       isMountedRef.current = false;
-
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      Hub.remove('auth', updateUser);
+      Hub.remove('auth', ({ payload: { event } }) => {
+        switch (event) {
+          case 'signIn':
+          case 'cognitoHostedUI':
+            updateUser();
+            break;
+          default:
+            break;
+        }
+      });
     };
   }, [isMountedRef]);
 
   return state;
-}
+};
