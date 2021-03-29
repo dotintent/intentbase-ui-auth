@@ -1,15 +1,22 @@
-name: Continuous Integration
-on: [pull_request]
+name: 'Continous delivery'
+on:
+  push:
+    branches:
+      - main
+      - next
+      - beta
 
 jobs:
-  Validate:
-    name: 'Validate Pull Request'
+  Release:
+    name: 'Release'
     runs-on: ubuntu-latest
     env:
-      NODE_VERSION: '12.x'
+      NODE_VERSION: 12.x
     steps:
       - name: 'Git checkout'
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       # Beginning of yarn setup, keep in sync between all workflows
       - name: Use node.js ${{ matrix.node-version }}
@@ -39,13 +46,8 @@ jobs:
         run: yarn install --frozen-lockfile
         # End of yarn setup
 
-      - name: 'Audit dependencies'
-        run: /bin/sh -c 'yarn audit --level high; [[ $? -ge 8 ]] && exit 1 || exit 0'
-      - name: 'Types check'
-        run: yarn type-check
-      - name: 'Prettier'
-        run: yarn format:check
-      - name: 'ESLint'
-        run: yarn lint
-      - name: 'Build'
-        run: yarn build
+      - name: 'Semantic release'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
