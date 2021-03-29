@@ -44,8 +44,8 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: 'Install dependency'
         run: yarn install --frozen-lockfile
-        # End of yarn setup
 
+        # End of yarn setup
       - name: 'Semantic release'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
