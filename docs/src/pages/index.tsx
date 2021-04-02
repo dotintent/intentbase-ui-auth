@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -6,7 +6,13 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
-const features = [
+interface FeatureProps {
+  imageUrl: string;
+  title: string;
+  description: ReactNode;
+}
+
+const features: Array<FeatureProps> = [
   {
     title: 'Auth Components',
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
@@ -29,7 +35,7 @@ const features = [
   },
 ];
 
-function Feature({ imageUrl, title, description }) {
+const Feature = ({ imageUrl, title, description }: FeatureProps) => {
   const imgUrl = useBaseUrl(imageUrl);
   return (
     <div className={clsx('col col--4', styles.feature)}>
@@ -42,7 +48,7 @@ function Feature({ imageUrl, title, description }) {
       <p>{description}</p>
     </div>
   );
-}
+};
 
 const Home = () => {
   const context = useDocusaurusContext();
