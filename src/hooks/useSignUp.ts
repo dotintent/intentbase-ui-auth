@@ -19,7 +19,7 @@ export interface SignUpRequires {
 // 2.) signUp<ValuesInterface>({ email, password, age });
 
 export const useSignUp = ({ onSuccess, successMsg }: UseSignUpProps = {}) => {
-  return async <T extends SignUpRequires>(props: any): Promise<string | undefined> => {
+  return async (props: any): Promise<string | undefined> => {
     const { email, password } = props;
     const formattedEmail = email.trim().toLowerCase();
 
