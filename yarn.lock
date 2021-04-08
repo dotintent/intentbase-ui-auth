@@ -2519,7 +2519,7 @@
   dependencies:
     lodash "^4.17.15"
 
-"@storybook/node-logger@6.1.10", "@storybook/node-logger@^6.1.10":
+"@storybook/node-logger@6.1.10":
   version "6.1.10"
   resolved "https://registry.yarnpkg.com/@storybook/node-logger/-/node-logger-6.1.10.tgz#0d69f30cf4c798919d2e467fad11d95273265ec7"
   integrity sha512-ABmkDbqsEgP+Szzs0TSaAeaudCtA25Pbd9n5bhaMQBqka86VV0Engtm5FHtYBE58XzWjD8L3AoBkPOt0mtRDVg==
@@ -2527,6 +2527,17 @@
     "@types/npmlog" "^4.1.2"
     chalk "^4.0.0"
     core-js "^3.0.1"
+    npmlog "^4.1.2"
+    pretty-hrtime "^1.0.3"
+
+"@storybook/node-logger@^6.1.10":
+  version "6.2.5"
+  resolved "https://registry.yarnpkg.com/@storybook/node-logger/-/node-logger-6.2.5.tgz#a1488dc75b0e359fd32937d9d27132c7f6a73874"
+  integrity sha512-vActH+XxtxUn0E/uxZbFgiFZ6fjnfkw9imLPrIhBzLuFU+HZP8INkP/SAIqPf5SzJ7k24fkZFaEq6QakB8mI2A==
+  dependencies:
+    "@types/npmlog" "^4.1.2"
+    chalk "^4.1.0"
+    core-js "^3.8.2"
     npmlog "^4.1.2"
     pretty-hrtime "^1.0.3"
 
@@ -4859,15 +4870,10 @@ core-js-pure@^3.0.0, core-js-pure@^3.0.1:
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.6.5.tgz#c79e75f5e38dbc85a662d91eea52b8256d53b813"
   integrity sha512-lacdXOimsiD0QyNf9BC/mxivNJ/ybBGJXQFKzRekp1WTHoVUWsUHEn+2T8GJAzzIhyOuXA+gOxCVN3l+5PLPUA==
 
-core-js@^3.0.1, core-js@^3.0.4, core-js@^3.6.5:
-  version "3.6.5"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
-  integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
-
-core-js@^3.6.1:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.8.0.tgz#0fc2d4941cadf80538b030648bb64d230b4da0ce"
-  integrity sha512-W2VYNB0nwQQE7tKS7HzXd7r2y/y2SVJl4ga6oH/dnaLFzM0o2lB2P3zCkWj5Wc/zyMYjtgd5Hmhk0ObkQFZOIA==
+core-js@^3.0.1, core-js@^3.0.4, core-js@^3.6.1, core-js@^3.6.5, core-js@^3.8.2:
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.10.1.tgz#e683963978b6806dcc6c0a4a8bd4ab0bdaf3f21a"
+  integrity sha512-pwCxEXnj27XG47mu7SXAwhLP3L5CrlvCB91ANUkIz40P27kUcvNfSdvyZJ9CLHiVoKSp+TTChMQMSKQEH/IQxA==
 
 core-util-is@~1.0.0:
   version "1.0.2"
