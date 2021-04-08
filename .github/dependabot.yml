@@ -3,13 +3,21 @@
 version: 2
 updates:
   - package-ecosystem: 'npm'
-    target-branch: 'develop'
     directory: '/'
+    labels:
+      - 'dependencies'
+    schedule:
+      interval: 'weekly'
+      day: 'friday'
+  - package-ecosystem: 'npm'
+    directory: '/docs'
+    labels:
+      - 'dependencies'
+      - 'docs'
     schedule:
       interval: 'weekly'
       day: 'friday'
   - package-ecosystem: 'github-actions'
-    target-branch: 'develop'
     directory: '/'
     schedule:
       interval: 'weekly'
