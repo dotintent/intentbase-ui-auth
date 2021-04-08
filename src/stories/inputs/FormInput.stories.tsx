@@ -14,13 +14,13 @@ interface TemplateProps extends FormInputProps {
   };
 }
 
-const Template: Story<TemplateProps> = (args) => (
+const Template: Story<TemplateProps> = ({ form, ...restArgs }) => (
   <Form
-    {...args.form}
+    {...form}
     onSubmit={() => {}}
     render={() => (
       <form>
-        <FormInput {...args} />
+        <FormInput {...restArgs} />
       </form>
     )}
   />

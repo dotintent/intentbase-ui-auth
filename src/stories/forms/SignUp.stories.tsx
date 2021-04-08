@@ -8,10 +8,10 @@ export default {
   component: SignUp,
 } as Meta;
 
-export const Default: Story<SignUpProps> = (args) => <SignUp {...args} onSubmit={args.onSubmit} />;
+export const Default: Story<SignUpProps> = (args) => <SignUp {...args} />;
 
 export const CustomFields: Story<SignUpProps> = (args) => (
-  <SignUp {...args} onSubmit={args.onSubmit}>
+  <SignUp {...args}>
     <FormInput source="firstName" />
     <FormInput source="lastName" required />
   </SignUp>
