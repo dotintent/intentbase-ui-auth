@@ -26,6 +26,7 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
+    '@typescript-eslint/return-await': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
     'react/jsx-filename-extension': 0,
     'import/no-unresolved': 0,
