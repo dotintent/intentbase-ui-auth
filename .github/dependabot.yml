@@ -1,0 +1,24 @@
+# For all config options check: https://docs.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates#reviewers
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    labels:
+      - 'dependencies'
+    schedule:
+      interval: 'weekly'
+      day: 'friday'
+  - package-ecosystem: 'npm'
+    directory: '/docs'
+    labels:
+      - 'dependencies'
+      - 'docs'
+    schedule:
+      interval: 'weekly'
+      day: 'friday'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'friday'

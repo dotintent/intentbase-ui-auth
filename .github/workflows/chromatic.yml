@@ -1,0 +1,62 @@
+name: Publish to Chromatic
+on:
+  push:
+    paths:
+      - 'src/**'
+      - '.github/workflows/chromatic.yml'
+
+jobs:
+  chromatic-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Git checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Required to retrieve git history
+
+      # Beginning of yarn setup, keep in sync between all workflows, see continous-integration.yml
+      - name: Use node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/ # Needed for auth
+      - name: 'Use cached node_modules'
+        id: cache-modules
+        uses: actions/cache@v2.1.4
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-v${{ matrix.node-version }}-node_modules-${{ hashFiles('yarn.lock', '**/package.json') }}
+      - name: 'Find location of global yarn cache'
+        id: yarn-cache
+        if: steps.cache-modules.outputs.cache-hit != 'true'
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: 'Cache global yarn cache'
+        uses: actions/cache@v2.1.4
+        if: steps.cache-modules.outputs.cache-hit != 'true'
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: 'Install dependency'
+        run: yarn install --frozen-lockfile
+      # End of yarn setup
+
+      # 👇 Checks if the branch is not main and runs Chromatic
+      - name: 'Publish to Chromatic'
+        if: github.ref != 'refs/heads/main'
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          exitZeroOnChanges: true
+
+      # 👇 Checks if the branch is main and accepts all changes in Chromatic
+      - name: 'Publish to Chromatic and auto accept changes'
+        if: github.ref == 'refs/heads/main'
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          autoAcceptChanges: true
+          exitZeroOnChanges: true

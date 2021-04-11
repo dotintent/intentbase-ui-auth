@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="https://intentbase-ui-auth.netlify.app"><strong>intentbase-ui-auth.netlify.app</strong></a>
+  <a href="https://main--5fd08c4b4e265f00211c9d46.chromatic.com"><strong>intentbase-ui-auth.chromatic.com</strong></a>
   <br>
 </p>
 

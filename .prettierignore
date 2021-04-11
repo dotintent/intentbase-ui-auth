@@ -3,3 +3,5 @@ dist
 .docusaurus
 build
 storybook-static
+coverage
+CHANGELOG.md
