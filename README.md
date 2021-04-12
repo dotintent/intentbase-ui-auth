@@ -17,13 +17,19 @@
   <br>
 </p>
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/@dotintent/intentbase-ui-auth">
+    <img alt="npm latest version" src="https://img.shields.io/npm/v/@dotintent/intentbase-ui-auth/latest.svg">
+  </a>
+</p>
+
 <hr>
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![CI](https://github.com/dotintent/intentbase-ui-auth/workflows/Continuous%20Integration/badge.svg)](https://github.com/dotintent/intentbase-ui-auth/actions?query=workflow%3A%22Continuous+Integration%22)
 [![NPM Bundle Size](https://img.shields.io/bundlephobia/minzip/@dotintent/intentbase-ui-auth)](https://www.npmjs.com/package/@dotintent/intentbase-ui-auth)
 [![NPM Downloads](https://img.shields.io/npm/dm/@dotintent/intentbase-ui-auth)](https://www.npmjs.com/package/@dotintent/intentbase-ui-auth)
-[![NPM Version](https://img.shields.io/npm/v/@dotintent/intentbase-ui-auth)](https://www.npmjs.com/package/@dotintent/intentbase-ui-auth)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 ## Table of Contents
 
