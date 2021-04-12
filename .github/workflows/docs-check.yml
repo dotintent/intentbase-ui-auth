@@ -16,12 +16,11 @@ jobs:
       - name: 'Git checkout'
         uses: actions/checkout@v2
 
-      # Beginning of yarn setup, keep in sync between all workflows, see continous-integration.yml
+      # Beginning of yarn setup, keep in sync between all workflows
       - name: Use node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node-version }}
-          registry-url: https://registry.npmjs.org/ # Needed for auth
       - name: 'Use cached node_modules'
         id: cache-modules
         uses: actions/cache@v2.1.4
@@ -42,7 +41,7 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: 'Install dependency'
         run: yarn install --frozen-lockfile
-      # End of yarn setup
+        # End of yarn setup
 
       - name: 'Build docs'
         run: yarn build
