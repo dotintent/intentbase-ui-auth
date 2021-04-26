@@ -45,7 +45,7 @@ const Template: Story<ShowSnackbarProps> = (args) => <SnackbarMock {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  message: 'Mock snackbar message',
+  message: 'Mock snackbar message.',
   severity: 'success',
   duration: undefined,
   position: {
