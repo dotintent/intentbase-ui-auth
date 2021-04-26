@@ -1,6 +1,6 @@
 {
   "name": "@dotintent/intentbase-ui-auth",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": false,
   "description": "UI React components for Log in, Register and Forgot password, to use with auth providers like Cognito",
   "keywords": [

@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/dotintent/intentbase-ui-auth/compare/v1.0.0...v1.1.0) (2021-04-26)
+
+
+### Features
+
+* customize storybook ([0ebb6ee](https://github.com/dotintent/intentbase-ui-auth/commit/0ebb6ee1907ba43ae9abbd2825676ff2f327198c))
+
 # 1.0.0 (2021-04-12)
 
 
