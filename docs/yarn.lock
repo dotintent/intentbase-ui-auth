@@ -1252,10 +1252,16 @@
     url-loader "^4.1.1"
     webpack "^4.44.1"
 
-"@docusaurus/module-type-aliases@^2.0.0-alpha.72":
-  version "2.0.0-alpha.72"
-  resolved "https://registry.yarnpkg.com/@docusaurus/module-type-aliases/-/module-type-aliases-2.0.0-alpha.72.tgz#0f568dfc7852bf65f7cbabbcbb7ffcc63f57a409"
-  integrity sha512-z8qGXvvyF8FYgnc0c7v5BqulrUJ0A01jsb2gT4miC6Gc/pKnpahZqBXcm1MrQiiUrlHMEjdOAxlHQVZuOwSSRQ==
+"@docusaurus/module-type-aliases@^2.0.0-beta.8":
+  version "2.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/@docusaurus/module-type-aliases/-/module-type-aliases-2.0.0-beta.8.tgz#6bc9ae6ab895ca96dff9df1e1247695b9a4826ad"
+  integrity sha512-2hW+PMfY+4kMD0MCLuezb9Ytj4jz237PbnKc9d+Lgqvkyri154QQKtkmWha+QOBiGJ4832LIFijtoyb+T+XQSA==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-helmet" "*"
+    "@types/react-loadable" "*"
+    "@types/react-router-config" "*"
+    "@types/react-router-dom" "*"
 
 "@docusaurus/plugin-content-blog@2.0.0-alpha.72":
   version "2.0.0-alpha.72"
@@ -1779,17 +1785,34 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
 
-"@types/react-helmet@^6.1.1":
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/@types/react-helmet/-/react-helmet-6.1.1.tgz#4fde22cbcaa1b461642e1d719cc6162d95acb110"
-  integrity sha512-VmSCMz6jp/06DABoY60vQa++h1YFt0PfAI23llxBJHbowqFgLUL0dhS1AQeVPNqYfRp9LAfokrfWACTNeobOrg==
+"@types/react-helmet@*", "@types/react-helmet@^6.1.1":
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/@types/react-helmet/-/react-helmet-6.1.4.tgz#3e54a3eb37ba7fb34ffafc64f425be4e68df03b9"
+  integrity sha512-jyx50RNZXVaTGHY3MsoRPNpeiVk8b0XTPgD/O6KHF6COTDnG/+lRjPYvTK5nfWtR3xDOux0w6bHLAsaHo2ZLTA==
   dependencies:
     "@types/react" "*"
 
-"@types/react-router-dom@^5.1.7":
-  version "5.1.7"
-  resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-5.1.7.tgz#a126d9ea76079ffbbdb0d9225073eb5797ab7271"
-  integrity sha512-D5mHD6TbdV/DNHYsnwBTv+y73ei+mMjrkGrla86HthE4/PVvL1J94Bu3qABU+COXzpL23T1EZapVVpwHuBXiUg==
+"@types/react-loadable@*":
+  version "5.5.6"
+  resolved "https://registry.yarnpkg.com/@types/react-loadable/-/react-loadable-5.5.6.tgz#fcf6493d5015a4602672f3773a32032ce77fedea"
+  integrity sha512-2M7xH/wawZxNybbs/a76JkpUsMk4z6AxBh92cUtIBy2vK7EYYuitQbC4laY0hGz0e05R+mQ44YeHMtH2U+gMsw==
+  dependencies:
+    "@types/react" "*"
+    "@types/webpack" "^4"
+
+"@types/react-router-config@*":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@types/react-router-config/-/react-router-config-5.0.3.tgz#72a53561bcb5e13b82c576527b818fa2579591c7"
+  integrity sha512-38vpjXic0+E2sIBEKUe+RrCmbc8RqcQhNV8OmU3KUcwgy/yzTeo67MhllP+0zjZWNr7Lhw+RnUkL0hzkf63nUQ==
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+    "@types/react-router" "*"
+
+"@types/react-router-dom@*", "@types/react-router-dom@^5.1.7":
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-5.3.1.tgz#76700ccce6529413ec723024b71f01fc77a4a980"
+  integrity sha512-UvyRy73318QI83haXlaMwmklHHzV9hjl3u71MmM6wYNu0hOVk9NLTa0vGukf8zXUqnwz4O06ig876YSPpeK28A==
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
@@ -1861,6 +1884,18 @@
     "@types/node" "*"
     "@types/source-list-map" "*"
     source-map "^0.7.3"
+
+"@types/webpack@^4":
+  version "4.41.31"
+  resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.41.31.tgz#c35f252a3559ddf9c85c0d8b0b42019025e581aa"
+  integrity sha512-/i0J7sepXFIp1ZT7FjUGi1eXMCg8HCCzLJEQkKsOtbJFontsJLolBcDC+3qxn5pPwiCt1G0ZdRmYRzNBtvpuGQ==
+  dependencies:
+    "@types/node" "*"
+    "@types/tapable" "^1"
+    "@types/uglify-js" "*"
+    "@types/webpack-sources" "*"
+    anymatch "^3.0.0"
+    source-map "^0.6.0"
 
 "@types/webpack@^4.41.0", "@types/webpack@^4.41.8":
   version "4.41.27"
@@ -2177,6 +2212,14 @@ anymatch@^2.0.0:
   dependencies:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
+
+anymatch@^3.0.0:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/anymatch/-/anymatch-3.1.2.tgz#c0557c096af32f106198f4f4e2a383537e378716"
+  integrity sha512-P43ePfOAIupkguHUycrc4qJ9kz8ZiuOUijaETwX7THt0Y/GNK7v0aa8rY816xWjZ7rJdA5XdMcpVFTKMq+RvWg==
+  dependencies:
+    normalize-path "^3.0.0"
+    picomatch "^2.0.4"
 
 anymatch@~3.1.1:
   version "3.1.1"
